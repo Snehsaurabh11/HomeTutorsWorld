@@ -2,13 +2,13 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { ROUTES } from '../constants/routes';
-import { CheckCircle2 } from 'lucide-react';
+import { GraduationCap, Banknote, Clock } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const tutorPerks = [
-  'Flexible Teaching Options',
-  'Grow Your Career',
-  'Earn with HomeTutorsWorld',
+  { icon: Clock,        text: 'Flexible Teaching Options' },
+  { icon: GraduationCap, text: 'Grow Your Career' },
+  { icon: Banknote,     text: 'Earn with HomeTutorsWorld' },
 ];
 
 /**
@@ -20,73 +20,70 @@ export function BecomeTutorSection() {
   return (
     <section
       ref={ref}
-      className="py-16 bg-white overflow-hidden"
+      className="py-12 bg-[#f6f3ff] overflow-hidden"
       aria-labelledby="become-tutor-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-neutral-50 rounded-4xl overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-0">
+        <div className="bg-white rounded-3xl overflow-hidden border border-neutral-200/80 shadow-card-lg">
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch gap-0">
             {/* Left — Content */}
             <motion.div
-              initial={{ opacity: 0, x: -40 }}
+              initial={{ opacity: 0, x: -32 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.7 }}
-              className="p-10 md:p-14"
+              transition={{ duration: 0.6 }}
+              className="p-8 md:p-12"
             >
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-purple-light text-brand-purple text-sm font-semibold rounded-full mb-6">
+              <span className="inline-flex items-center gap-2 px-3 py-1 bg-brand-purple-light text-brand-purple text-xs font-bold rounded-full mb-5 tracking-wide uppercase">
                 🎓 Join Our Network
               </span>
 
               <h2
                 id="become-tutor-heading"
-                className="font-display font-black text-neutral-900 text-4xl md:text-5xl leading-tight"
+                className="font-display font-black text-neutral-900 text-3xl md:text-4xl leading-tight tracking-tight"
               >
                 Become a Tutor
               </h2>
-              <p className="text-neutral-600 text-lg mt-4 leading-relaxed">
+              <p className="text-neutral-500 text-base mt-3 leading-relaxed max-w-sm">
                 Join our community of expert educators and make a difference in students' lives.
               </p>
 
-              <ul className="flex flex-col gap-3 mt-8">
-                {tutorPerks.map((perk) => (
-                  <li key={perk} className="flex items-center gap-3 text-neutral-700 font-medium">
-                    <CheckCircle2 className="w-5 h-5 text-brand-purple flex-shrink-0" />
-                    {perk}
+              <ul className="flex flex-col gap-3 mt-7">
+                {tutorPerks.map(({ icon: Icon, text }) => (
+                  <li key={text} className="flex items-center gap-3 text-neutral-700 text-sm font-medium">
+                    <span className="w-7 h-7 rounded-lg bg-brand-purple-light text-brand-purple flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-3.5 h-3.5" />
+                    </span>
+                    {text}
                   </li>
                 ))}
               </ul>
 
-              <div className="mt-10">
+              <div className="mt-8">
                 <Link to={ROUTES.BECOME_TUTOR}>
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    id="become-tutor-cta"
-                  >
+                  <Button variant="primary" size="md" id="become-tutor-cta">
                     Join as a Tutor
                   </Button>
                 </Link>
               </div>
             </motion.div>
 
-            {/* Right — Image placeholder (replace with actual image) */}
+            {/* Right — Visual */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
+              initial={{ opacity: 0, x: 32 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="relative h-80 lg:h-full min-h-[360px] bg-gradient-brand flex items-end justify-center overflow-hidden"
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="relative min-h-[280px] lg:min-h-0 bg-gradient-brand flex items-center justify-center overflow-hidden"
             >
-              {/* Decorative elements */}
-              <div className="absolute top-6 right-6 w-24 h-24 rounded-full border-4 border-white/20" aria-hidden="true" />
-              <div className="absolute top-20 right-20 w-12 h-12 rounded-full border-4 border-white/10" aria-hidden="true" />
-              <div className="absolute bottom-10 left-10 w-16 h-16 rounded-full border-4 border-white/15" aria-hidden="true" />
+              {/* Decorative circles */}
+              <div className="absolute top-8 right-8 w-20 h-20 rounded-full border-2 border-white/20" aria-hidden="true" />
+              <div className="absolute top-16 right-20 w-10 h-10 rounded-full border-2 border-white/10" aria-hidden="true" />
+              <div className="absolute bottom-12 left-10 w-14 h-14 rounded-full border-2 border-white/15" aria-hidden="true" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full border border-white/10" aria-hidden="true" />
 
-              {/* Tutor illustration placeholder */}
-              <div className="flex flex-col items-center justify-center h-full text-white text-center p-8">
-                <div className="text-7xl mb-4">👩‍🏫</div>
-                <p className="text-white/80 text-sm font-medium">
-                  500+ tutors already earning with us
-                </p>
+              <div className="flex flex-col items-center justify-center text-white text-center p-8 relative z-10">
+                <div className="text-6xl mb-3" role="img" aria-label="Teacher">👩‍🏫</div>
+                <p className="text-white/90 text-sm font-semibold">500+ tutors already</p>
+                <p className="text-white/70 text-xs mt-1">earning with us</p>
               </div>
             </motion.div>
           </div>

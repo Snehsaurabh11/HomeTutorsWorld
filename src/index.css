@@ -1,34 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Global Reset */
+/* ============================================================
+   GLOBAL RESET & BASE
+   ============================================================ */
 *,
 *::before,
 *::after {
-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-scroll-behavior: smooth;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-font-family: Inter, system-ui, sans-serif;
-color: #1A1A2E;
-background-color: #ffffff;
-font-feature-settings: "kern" 1, "liga" 1;
-margin: 0;
-padding: 0;
+  font-family: Inter, system-ui, sans-serif;
+  color: #1A1A2E;
+  background-color: #faf9ff;
+  font-feature-settings: "kern" 1, "liga" 1;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
 }
 
 #root {
-min-height: 100vh;
-width: 100%;
+  min-height: 100vh;
+  width: 100%;
 }
 
 h1,
@@ -37,47 +40,124 @@ h3,
 h4,
 h5,
 h6 {
-font-family: Outfit, Inter, system-ui, sans-serif;
+  font-family: Outfit, Inter, system-ui, sans-serif;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 button {
-cursor: pointer;
+  cursor: pointer;
 }
 
 img {
-max-width: 100%;
-height: auto;
-display: block;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 :focus-visible {
-outline: 2px solid #7263B4;
-outline-offset: 2px;
-border-radius: 6px;
+  outline: 2px solid #7263B4;
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
-/* Custom Scrollbar */
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
 .scrollbar-brand {
-scrollbar-width: thin;
-scrollbar-color: #7263B4 #EDE9FF;
+  scrollbar-width: thin;
+  scrollbar-color: #7263B4 #EDE9FF;
 }
 
 .scrollbar-brand::-webkit-scrollbar {
-width: 6px;
+  width: 6px;
 }
 
 .scrollbar-brand::-webkit-scrollbar-track {
-background: #EDE9FF;
-border-radius: 999px;
+  background: #EDE9FF;
+  border-radius: 999px;
 }
 
 .scrollbar-brand::-webkit-scrollbar-thumb {
-background: #7263B4;
-border-radius: 999px;
+  background: #7263B4;
+  border-radius: 999px;
 }
 
-/* Text Selection */
+/* ============================================================
+   TEXT SELECTION
+   ============================================================ */
 ::selection {
-background-color: #EDE9FF;
-color: #5238D4;
+  background-color: #EDE9FF;
+  color: #5238D4;
+}
+
+/* ============================================================
+   FAQ ACCORDION — custom open indicator
+   ============================================================ */
+details.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+details.faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+/* ============================================================
+   SECTION BACKGROUNDS — premium soft purple palette
+   ============================================================ */
+.bg-section-primary   { background-color: #faf9ff; }
+.bg-section-secondary { background-color: #f6f3ff; }
+.bg-section-tertiary  { background-color: #f2eeff; }
+
+/* ============================================================
+   PILL HOVER ANIMATION
+   ============================================================ */
+.subject-pill {
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.subject-pill:hover {
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   STEP CONNECTOR LINE
+   ============================================================ */
+.step-connector {
+  position: absolute;
+  top: 24px;
+  left: calc(50% + 36px);
+  right: calc(-50% + 36px);
+  height: 1px;
+  background: linear-gradient(90deg, #7668B6 0%, #c4b8f0 100%);
+  opacity: 0.4;
+}
+
+/* ============================================================
+   MARQUEE ANIMATIONS — ServicesSection infinite scrolling rows
+   ============================================================ */
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 20s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 24s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover for accessibility */
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
 }

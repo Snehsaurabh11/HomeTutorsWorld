@@ -30,8 +30,8 @@ export function Navbar() {
       className={cn(
         'fixed top-0 left-0 right-0 z-[100] transition-all duration-300',
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-100'
-          : 'bg-white'
+          ? 'bg-white/96 backdrop-blur-lg shadow-soft border-b border-brand-purple/8'
+          : 'bg-white/90 backdrop-blur-sm'
       )}
     >
       <nav
@@ -44,10 +44,10 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Nav Links */}
-        <div className="hidden lg:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-0.5">
           {navLinks.map((link) =>
             link.highlight ? (
-              <Link key={link.label} to={link.href} onClick={closeMobileMenu}>
+              <Link key={link.label} to={link.href} onClick={closeMobileMenu} className="ml-2">
                 <Button variant="primary" size="sm" id={`nav-${link.label.toLowerCase().replace(/ /g, '-')}`}>
                   {link.label}
                 </Button>
@@ -60,14 +60,26 @@ export function Navbar() {
                 id={`nav-${link.label.toLowerCase().replace(/ /g, '-')}`}
                 className={({ isActive }) =>
                   cn(
-                    'px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200',
+                    'relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ease-out group',
                     isActive
-                      ? 'text-brand-purple bg-[#EAE7F8]'
-                      : 'text-neutral-600 hover:text-brand-purple hover:bg-brand-purple-light/50'
+                      ? 'text-brand-purple bg-brand-purple-light'
+                      : 'text-neutral-600 hover:text-brand-purple hover:bg-brand-purple/6'
                   )
                 }
               >
-                {link.label}
+                {({ isActive }) => (
+                  <>
+                    {link.label}
+                    {/* Active underline indicator */}
+                    <span
+                      className={cn(
+                        'absolute bottom-0.5 left-4 right-4 h-0.5 rounded-full bg-brand-purple transition-all duration-200',
+                        isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+                      )}
+                      aria-hidden="true"
+                    />
+                  </>
+                )}
               </NavLink>
             )
           )}
@@ -76,9 +88,11 @@ export function Navbar() {
         {/* Desktop Phone CTA */}
         <a
           href={`tel:${APP_CONFIG.phone.replace(/\s/g, '')}`}
-          className="hidden lg:flex items-center gap-2 text-sm font-semibold text-brand-purple hover:text-brand-purple-dark transition-colors"
+          className="hidden lg:flex items-center gap-2 text-sm font-semibold text-brand-purple hover:text-brand-purple-dark transition-colors duration-200"
         >
-          <Phone className="w-4 h-4" />
+          <span className="w-8 h-8 rounded-full bg-brand-purple-light flex items-center justify-center">
+            <Phone className="w-3.5 h-3.5" />
+          </span>
           {APP_CONFIG.phone}
         </a>
 
@@ -86,23 +100,23 @@ export function Navbar() {
         <button
           id="mobile-menu-toggle"
           onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          className="lg:hidden p-2 rounded-lg text-neutral-600 hover:text-brand-purple hover:bg-brand-purple-light transition-colors"
+          className="lg:hidden p-2 rounded-lg text-neutral-600 hover:text-brand-purple hover:bg-brand-purple-light transition-all duration-200"
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isMobileMenuOpen}
         >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </nav>
 
       {/* Mobile Menu Drawer */}
       <div
         className={cn(
-          'lg:hidden overflow-hidden transition-all duration-300 bg-white border-t border-neutral-100',
+          'lg:hidden overflow-hidden transition-all duration-300 ease-out bg-white border-t border-neutral-100/80',
           isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
         )}
         aria-hidden={!isMobileMenuOpen}
       >
-        <div className="px-4 py-4 flex flex-col gap-1">
+        <div className="px-4 py-3 flex flex-col gap-1">
           {navLinks.map((link) =>
             link.highlight ? (
               <Link key={link.label} to={link.href} onClick={closeMobileMenu} className="mt-2">
@@ -117,10 +131,10 @@ export function Navbar() {
                 onClick={closeMobileMenu}
                 className={({ isActive }) =>
                   cn(
-                    'px-4 py-3 rounded-xl text-base font-medium transition-colors',
+                    'px-4 py-2.5 rounded-xl text-base font-medium transition-all duration-200',
                     isActive
-                      ? 'text-brand-purple bg-brand-purple-light'
-                      : 'text-neutral-700 hover:text-brand-purple hover:bg-brand-purple-light/50'
+                      ? 'text-brand-purple bg-brand-purple-light font-semibold'
+                      : 'text-neutral-700 hover:text-brand-purple hover:bg-brand-purple/6'
                   )
                 }
               >
@@ -131,9 +145,11 @@ export function Navbar() {
           {/* Mobile Phone */}
           <a
             href={`tel:${APP_CONFIG.phone.replace(/\s/g, '')}`}
-            className="flex items-center gap-2 px-4 py-3 text-brand-purple font-semibold text-base"
+            className="flex items-center gap-2.5 px-4 py-2.5 text-brand-purple font-semibold text-base mt-1"
           >
-            <Phone className="w-5 h-5" />
+            <span className="w-8 h-8 rounded-full bg-brand-purple-light flex items-center justify-center flex-shrink-0">
+              <Phone className="w-3.5 h-3.5" />
+            </span>
             {APP_CONFIG.phone}
           </a>
         </div>

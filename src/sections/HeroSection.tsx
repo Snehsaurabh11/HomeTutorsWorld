@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LeadForm } from '../components/LeadForm';
 import { Button } from '../components/ui/Button';
@@ -7,17 +9,24 @@ import { ROUTES } from '../constants/routes';
 import { APP_CONFIG } from '../constants/config';
 
 const heroHighlights = [
-  'Verified & Experienced Tutors',
-  'Personalized Learning',
-  'Free Demo Class',
+  'Verified tutors',
+  'Personalized learning',
+  'Free demo class',
 ];
 
-const fadeUp: any = {
-  hidden: { opacity: 0, y: 30 },
+const rotatingWords = [
+  'Math Tutor',
+  'Science Tutor',
+  'Physics Tutor',
+  'English Tutor',
+];
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24 },
   visible: (delay: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay, ease: 'easeOut' },
+    transition: { duration: 0.55, delay, ease: [0.25, 0.46, 0.45, 0.94] },
   }),
 };
 
@@ -25,33 +34,49 @@ const fadeUp: any = {
  * HeroSection — above-the-fold section with tagline and inline lead form
  */
 export function HeroSection() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setIsFading(true);
+      window.setTimeout(() => {
+        setWordIndex((index) => (index + 1) % rotatingWords.length);
+        setIsFading(false);
+      }, 280);
+    }, 4200);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
   return (
     <section
-      className="relative bg-gradient-hero overflow-hidden min-h-[calc(100vh-64px)] flex items-center"
+     className="relative overflow-hidden flex items-center bg-gradient-to-br from-[#efe8ff] via-[#e8deff] to-[#ddd0ff]"
       aria-label="Hero section"
     >
-      {/* Background decorative dots */}
+      {/* Background grid dots */}
       <div
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-[0.18]"
         style={{
-          backgroundImage: 'radial-gradient(circle, #6B4EFF22 1px, transparent 1px)',
-          backgroundSize: '30px 30px',
+          backgroundImage: 'radial-gradient(circle, #7260c1 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
         }}
         aria-hidden="true"
       />
 
-      {/* Decorative blobs */}
+      {/* Top-right glow blob */}
       <div
-        className="absolute -top-32 -right-32 w-96 h-96 bg-brand-purple/10 rounded-full blur-3xl"
+        className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-brand-purple/12 rounded-full blur-3xl"
         aria-hidden="true"
       />
+      {/* Bottom-left glow blob */}
       <div
-        className="absolute -bottom-20 -left-20 w-64 h-64 bg-brand-yellow/10 rounded-full blur-2xl"
+        className="absolute -bottom-24 -left-24 w-72 h-72 bg-brand-purple/10 rounded-full blur-2xl"
         aria-hidden="true"
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
           {/* Left — Copy */}
           <div>
             <motion.div
@@ -60,7 +85,7 @@ export function HeroSection() {
               custom={0}
               variants={fadeUp}
             >
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-purple-light text-brand-purple text-sm font-semibold rounded-full mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-purple-light text-brand-purple text-xs font-bold rounded-full mb-5 tracking-wide uppercase">
                 ✨ {APP_CONFIG.tagline}
               </span>
             </motion.div>
@@ -68,47 +93,50 @@ export function HeroSection() {
             <motion.h1
               initial="hidden"
               animate="visible"
-              custom={0.1}
+              custom={0.08}
               variants={fadeUp}
-              className="font-display font-black text-neutral-900 text-4xl sm:text-5xl lg:text-6xl leading-tight"
+              className="font-display font-black text-neutral-900 text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.1] tracking-tight"
             >
-              The Right Tutor{' '}
+              Find The Best
               <br className="hidden sm:block" />
-              Makes{' '}
-              <span className="text-brand-purple relative">
-                All The
+              <span className="inline-flex items-center gap-3 mt-2 sm:mt-0">
                 <span
-                  className="absolute -bottom-1 left-0 right-0 h-1 bg-brand-yellow rounded-full"
-                  aria-hidden="true"
-                />
-              </span>{' '}
-              <br />
-              Difference
+                  className={`relative inline-block text-brand-yellow-dark transition-opacity duration-300 ${
+                    isFading ? 'opacity-0' : 'opacity-100'
+                  }`}
+                >
+                  {rotatingWords[wordIndex]}
+                </span>
+              </span>
             </motion.h1>
 
             <motion.p
               initial="hidden"
               animate="visible"
-              custom={0.2}
+              custom={0.18}
               variants={fadeUp}
-              className="text-neutral-600 text-lg mt-6 leading-relaxed max-w-lg"
+              className="text-neutral-500 text-base mt-4 max-w-[440px] leading-relaxed"
             >
-              Personalized home tuition and online classes for every student,
-              every goal. Connect with verified, experienced tutors near you.
+              Verified tutors, personalized plans, and flexible demo classes for better learning outcomes.
             </motion.p>
 
             {/* Highlights */}
             <motion.ul
               initial="hidden"
               animate="visible"
-              custom={0.3}
+              custom={0.28}
               variants={fadeUp}
-              className="flex flex-col gap-3 mt-8"
+              className="grid grid-cols-3 gap-2.5 mt-7"
             >
               {heroHighlights.map((item) => (
-                <li key={item} className="flex items-center gap-3 text-neutral-700 font-medium">
-                  <CheckCircle2 className="w-5 h-5 text-brand-purple flex-shrink-0" />
-                  {item}
+                <li
+                  key={item}
+                  className="rounded-2xl bg-white/80 border border-brand-purple/10 p-3 text-center text-xs font-semibold text-neutral-700 shadow-soft backdrop-blur-sm"
+                >
+                  <span className="inline-flex items-center justify-center w-7 h-7 mx-auto mb-1.5 rounded-full bg-brand-purple-light text-brand-purple">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                  </span>
+                  <div>{item}</div>
                 </li>
               ))}
             </motion.ul>
@@ -117,9 +145,9 @@ export function HeroSection() {
             <motion.div
               initial="hidden"
               animate="visible"
-              custom={0.4}
+              custom={0.36}
               variants={fadeUp}
-              className="mt-8 flex items-center gap-4 lg:hidden"
+              className="mt-7 flex items-center gap-4 lg:hidden"
             >
               <Link to={ROUTES.REQUEST_TUTOR}>
                 <Button variant="primary" size="lg" id="hero-mobile-cta">
@@ -132,15 +160,17 @@ export function HeroSection() {
             <motion.div
               initial="hidden"
               animate="visible"
-              custom={0.5}
+              custom={0.44}
               variants={fadeUp}
-              className="mt-10 grid grid-cols-3 gap-4 max-w-md"
+              className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 w-full"
             >
               {Object.entries(APP_CONFIG.stats).map(([key, value]) => (
                 <div key={key} className="text-center">
-                  <div className="font-display font-black text-2xl text-brand-purple">{value}</div>
-                  <div className="text-xs text-neutral-500 mt-0.5 capitalize">
-                    {key.replace(/([A-Z])/g, ' $1').trim()}
+                  <div className="rounded-2xl bg-white/80 backdrop-blur-sm p-3.5 shadow-soft border border-brand-purple/10">
+                    <div className="font-display font-black text-xl text-brand-purple">{value}</div>
+                    <div className="text-[11px] text-neutral-400 mt-1 capitalize font-medium">
+                      {key.replace(/([A-Z])/g, ' $1').trim()}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -149,9 +179,9 @@ export function HeroSection() {
 
           {/* Right — Lead Form */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 32 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
+            transition={{ duration: 0.65, delay: 0.18, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="w-full max-w-md mx-auto lg:ml-auto lg:mr-0"
           >
             <LeadForm

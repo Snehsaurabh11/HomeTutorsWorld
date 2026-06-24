@@ -1,22 +1,20 @@
 import { motion } from 'framer-motion';
-import { MapPin } from 'lucide-react';
+import { MapPin, Rocket } from 'lucide-react';
 import { SectionHeader } from '../components/SectionHeader';
-import { Card } from '../components/ui/Card';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 interface ServiceLocation {
-  id: string;
+  id:   string;
   name: string;
-  icon: string;
 }
 
 const activeLocations: ServiceLocation[] = [
-  { id: 'loc-01', name: 'Delhi', icon: '🏙️' },
-  { id: 'loc-02', name: 'Noida', icon: '🏢' },
-  { id: 'loc-03', name: 'Greater Noida', icon: '🏘️' },
-  { id: 'loc-04', name: 'Ghaziabad', icon: '🌆' },
-  { id: 'loc-05', name: 'Gurugram', icon: '🏗️' },
-  { id: 'loc-06', name: 'Faridabad', icon: '🏭' },
+  { id: 'loc-01', name: 'Delhi' },
+  { id: 'loc-02', name: 'Noida' },
+  { id: 'loc-03', name: 'Greater Noida' },
+  { id: 'loc-04', name: 'Ghaziabad' },
+  { id: 'loc-05', name: 'Gurugram' },
+  { id: 'loc-06', name: 'Faridabad' },
 ];
 
 const expandingSoonLocations = [
@@ -27,8 +25,8 @@ const expandingSoonLocations = [
 ];
 
 /**
- * ServiceLocationsSection — Displays service locations with map
- * Shows currently serving areas and expansion plans
+ * ServiceLocationsSection — map left, city pills right
+ * Preserves Google Map; replaces emoji card grid with premium location pills
  */
 export function ServiceLocationsSection() {
   const { ref, isInView } = useScrollAnimation<HTMLElement>();
@@ -36,128 +34,105 @@ export function ServiceLocationsSection() {
   return (
     <section
       ref={ref}
-      className="py-16 bg-[#F3EEFF]"
+      className="py-12 bg-[#f6f3ff]"
       aria-labelledby="locations-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
           <SectionHeader
             eyebrow="Service Locations"
             title={<>Currently Serving Across Delhi NCR</>}
-            subtitle="Providing trusted home and online tuition services across Delhi NCR with expansion planned for more cities."
+            subtitle="Trusted home and online tuition across 6 cities — with more cities launching soon."
             align="center"
           />
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
-          {/* Left: Location Cards */}
+        {/* Map LEFT — Cities RIGHT */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8 items-start">
+          {/* LEFT: Google Map */}
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
+            initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.55, delay: 0.1 }}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              {activeLocations.map((location, index) => (
-                <motion.div
-                  key={location.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: index * 0.06 }}
-                >
-                  <Card hover className="p-6 text-center h-full flex flex-col items-center justify-center">
-                    <div className="text-4xl mb-3">{location.icon}</div>
-                    <h3 className="font-display font-bold text-neutral-900 text-lg">
-                      {location.name}
-                    </h3>
-                    <div className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-brand-purple">
-                      <MapPin className="w-3 h-3" />
-                      Active
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
+            <div className="w-full rounded-2xl overflow-hidden border border-brand-purple/15 shadow-card-lg">
+              <iframe
+                title="HomeTutorsWorld Service Locations"
+                src="https://www.google.com/maps?q=Delhi%20NCR&output=embed"
+                width="100%"
+                height="420"
+                style={{ border: 0, display: 'block' }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
-
-            {/* Expanding Soon Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-gradient-to-r from-brand-purple-light to-blue-50 rounded-lg p-6 border border-brand-purple/20"
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-brand-purple text-white text-xs font-bold">
-                  ⭐
-                </span>
-                <h4 className="font-display font-bold text-neutral-900">
-                  Expanding Soon
-                </h4>
-              </div>
-              <p className="text-sm text-neutral-600 mb-4">
-                We're expanding to new cities to serve more students
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {expandingSoonLocations.map((city) => (
-                  <span
-                    key={city}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full text-xs font-medium text-neutral-700 border border-neutral-200"
-                  >
-                    <span className="text-base">🚀</span>
-                    {city}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
 
-         {/* Right: Google Map */}
-<motion.div
-  initial={{ opacity: 0, x: 24 }}
-  animate={isInView ? { opacity: 1, x: 0 } : {}}
-  transition={{ duration: 0.6, delay: 0.2 }}
->
-  <div className="w-full rounded-xl overflow-hidden border-2 border-brand-purple/20 bg-white shadow-card">
-    <iframe
-      title="HomeTutorsWorld Service Locations"
-      src="https://www.google.com/maps?q=Delhi%20NCR&output=embed"
-      width="100%"
-      height="500"
-      style={{ border: 0 }}
-      loading="lazy"
-      referrerPolicy="no-referrer-when-downgrade"
-      className="w-full"
-    />
-
-    <div className="p-6 border-t border-neutral-200">
-      <h3 className="font-display font-bold text-neutral-900 text-xl mb-3">
-        Home Tutors Available Across Delhi NCR
-      </h3>
-
-      <p className="text-neutral-600 text-sm leading-relaxed mb-4">
-        We currently provide qualified home tutors and online tutors across
-        Delhi, Noida, Greater Noida, Ghaziabad, Gurugram and Faridabad.
-      </p>
-
-      <div className="flex flex-wrap gap-2">
-        {activeLocations.map((location) => (
-          <span
-            key={location.id}
-            className="px-3 py-1 rounded-full bg-brand-purple-light text-brand-purple text-xs font-medium"
+          {/* RIGHT: Cities we serve */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.55, delay: 0.15 }}
+            className="flex flex-col gap-5"
           >
-            {location.name}
-          </span>
-        ))}
-      </div>
-    </div>
-  </div>
-</motion.div>
+            {/* Active cities */}
+            <div className="bg-white rounded-2xl border border-neutral-200/80 shadow-card p-5">
+              <h3 className="font-display font-bold text-neutral-900 text-base mb-4 flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-brand-purple flex-shrink-0" />
+                Cities We Serve
+              </h3>
+              <div className="flex flex-wrap gap-2.5">
+                {activeLocations.map((location, index) => (
+                  <motion.span
+                    key={location.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.2, delay: 0.2 + index * 0.05 }}
+                    className="subject-pill inline-flex items-center gap-2 px-4 py-2 bg-brand-purple-light text-brand-purple rounded-xl text-sm font-semibold border border-brand-purple/15 hover:bg-brand-purple hover:text-white transition-all duration-200 cursor-default"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0" aria-hidden="true" />
+                    {location.name}
+                  </motion.span>
+                ))}
+              </div>
+
+              <p className="text-xs text-neutral-400 mt-4 leading-relaxed">
+                Home tutors and online tutors available across all listed cities.
+              </p>
+            </div>
+
+            {/* Expanding soon */}
+            <div className="bg-white rounded-2xl border border-neutral-200/80 shadow-card p-5">
+              <h3 className="font-display font-bold text-neutral-900 text-base mb-1 flex items-center gap-2">
+                <Rocket className="w-4 h-4 text-violet-500 flex-shrink-0" />
+                Expanding Soon
+              </h3>
+              <p className="text-xs text-neutral-500 mb-4 leading-relaxed">
+                We're growing fast — these cities launch soon.
+              </p>
+              <div className="flex flex-wrap gap-2.5">
+                {expandingSoonLocations.map((city, index) => (
+                  <motion.span
+                    key={city}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.2, delay: 0.35 + index * 0.06 }}
+                    className="subject-pill inline-flex items-center gap-2 px-4 py-2 bg-neutral-50 text-neutral-600 rounded-xl text-sm font-medium border border-neutral-200 hover:border-brand-purple/30 hover:bg-brand-purple-light/40 hover:text-brand-purple transition-all duration-200 cursor-default"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400 flex-shrink-0" aria-hidden="true" />
+                    {city}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
-

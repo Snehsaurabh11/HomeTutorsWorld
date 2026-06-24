@@ -14,7 +14,7 @@ export function StatisticsSection() {
   const { ref, isInView } = useScrollAnimation<HTMLElement>();
 
   return (
-    <section ref={ref} className="py-20 bg-white" aria-labelledby="statistics-heading">
+    <section ref={ref} className="py-16 bg-[#F4F1FF]" aria-labelledby="statistics-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -29,7 +29,7 @@ export function StatisticsSection() {
           />
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           {stats.map((item, index) => (
             <motion.div
               key={item.key}

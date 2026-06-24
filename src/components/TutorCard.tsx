@@ -20,22 +20,26 @@ export function TutorCard({ tutor, variant = 'default', className }: TutorCardPr
   if (variant === 'compact') {
     return (
       <Card hover className={cn('text-center p-5', className)}>
-        <div className="relative mx-auto w-20 h-20 mb-3">
+        {/* Avatar */}
+        <div className="relative mx-auto w-16 h-16 mb-3">
           <img
             src={tutor.photo}
             alt={tutor.name}
-            className="w-20 h-20 rounded-full object-cover border-4 border-brand-purple-light"
+            className="w-16 h-16 rounded-full object-cover border-[3px] border-brand-purple-light"
           />
           {tutor.status === 'active' && (
-            <span className="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white" />
+            <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white" />
           )}
         </div>
-        <h3 className="font-display font-bold text-neutral-900 text-base">{tutor.name}</h3>
-        <p className="text-xs text-neutral-500 mt-0.5 mb-2">{tutor.qualification}</p>
-        <p className="text-xs text-neutral-600 mb-2">
+
+        <h3 className="font-display font-bold text-neutral-900 text-sm leading-tight">
+          {tutor.name}
+        </h3>
+        <p className="text-[11px] text-neutral-400 mt-0.5 mb-2">{tutor.qualification}</p>
+        <p className="text-[11px] text-neutral-600 mb-2 font-medium">
           {tutor.subjects.slice(0, 2).join(' · ')}
         </p>
-        <p className="text-xs text-neutral-400 mb-3">{formatExperience(tutor.experience)}</p>
+        <p className="text-[11px] text-neutral-400 mb-3">{formatExperience(tutor.experience)}</p>
         <StarRating rating={tutor.rating} size="sm" />
       </Card>
     );
@@ -57,12 +61,12 @@ export function TutorCard({ tutor, variant = 'default', className }: TutorCardPr
 
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="font-display font-bold text-neutral-900 text-lg leading-tight">
+            <h3 className="font-display font-bold text-neutral-900 text-base leading-tight">
               {tutor.name}
             </h3>
             <StarRating rating={tutor.rating} size="sm" showValue />
           </div>
-          <p className="text-sm text-neutral-500 mt-0.5">{tutor.qualification}</p>
+          <p className="text-xs text-neutral-500 mt-0.5">{tutor.qualification}</p>
 
           <div className="flex flex-wrap gap-1.5 mt-2">
             {tutor.subjects.map((sub) => (

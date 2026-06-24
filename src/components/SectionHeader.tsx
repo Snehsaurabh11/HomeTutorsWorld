@@ -28,25 +28,25 @@ export function SectionHeader({
   className,
 }: SectionHeaderProps) {
   const alignClass = {
-    left: 'text-left items-start',
+    left:   'text-left items-start',
     center: 'text-center items-center',
-    right: 'text-right items-end',
+    right:  'text-right items-end',
   }[align];
 
   return (
     <div className={cn('flex flex-col gap-3', alignClass, className)}>
       {eyebrow && (
-        <span className="inline-flex items-center gap-2 text-sm font-semibold text-brand-purple uppercase tracking-widest">
-          <span className="w-6 h-0.5 bg-brand-purple rounded-full" aria-hidden="true" />
+        <span className="inline-flex items-center gap-2 text-xs font-bold text-brand-purple uppercase tracking-[0.14em]">
+          <span className="w-5 h-px bg-brand-purple/50 rounded-full" aria-hidden="true" />
           {eyebrow}
-          <span className="w-6 h-0.5 bg-brand-purple rounded-full" aria-hidden="true" />
+          <span className="w-5 h-px bg-brand-purple/50 rounded-full" aria-hidden="true" />
         </span>
       )}
-      <h2 className="font-display font-bold text-neutral-900 text-3xl md:text-4xl leading-tight">
+      <h2 className="font-display font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-neutral-500 text-base md:text-lg max-w-2xl leading-relaxed">
+        <p className="text-neutral-500 text-base md:text-lg max-w-2xl leading-relaxed font-normal">
           {subtitle}
         </p>
       )}

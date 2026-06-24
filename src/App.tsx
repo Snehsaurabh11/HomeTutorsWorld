@@ -8,6 +8,7 @@ import { BecomeTutorPage } from './pages/BecomeTutorPage';
 import { SubjectsPage } from './pages/SubjectsPage';
 import { ThankYouPage } from './pages/ThankYouPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { ContactPage } from './pages/ContactPage';
 import { ROUTES } from './constants/routes';
 
 /**
@@ -27,7 +28,7 @@ function App() {
           <Route path={ROUTES.TUTORS} element={<div className="py-32 text-center text-neutral-400">Tutors page coming soon</div>} />
           <Route path={ROUTES.SERVICES} element={<SubjectsPage />} />
           <Route path={ROUTES.ABOUT} element={<div className="py-32 text-center text-neutral-400">About page coming soon</div>} />
-          <Route path={ROUTES.CONTACT} element={<div className="py-32 text-center text-neutral-400">Contact page coming soon</div>} />
+          <Route path={ROUTES.CONTACT} element={<ContactPage />} />
         </Route>
 
         {/* Minimal layout routes (no Navbar/Footer) */}
