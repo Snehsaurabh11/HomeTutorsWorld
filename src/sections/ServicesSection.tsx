@@ -1,70 +1,70 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 /**
- * ServicesSection — redesigned with:
- * - Board selector tabs (fixed, always visible)
- * - Marquee Row 1: Subjects scrolling left →
- * - Marquee Row 2: Key topics scrolling right ←
- * Accent color: brand-yellow (#F5A623) for energy and engagement
+ * ServicesSection — Three infinite marquee rows (data-driven):
+ *   Row 1: Boards & Exams  → scrolls LEFT
+ *   Row 2: Subjects        → scrolls RIGHT
+ *   Row 3: Skills & Languages → scrolls LEFT
+ *
+ * To add/remove items: edit the arrays below.
+ * No JSX changes needed.
  */
 
-/* ─── Board data ─────────────────────────────── */
-const boardTabs = [
-  { id: 'cbse',       label: 'CBSE' },
-  { id: 'icse',       label: 'ICSE' },
-  { id: 'isc',        label: 'ISC' },
-  { id: 'state',      label: 'State Boards' },
-  { id: 'nios',       label: 'NIOS' },
-  { id: 'jee-neet',   label: 'JEE / NEET' },
+/* ─── Row 1: Boards & Exams ─────────────────────── */
+const boardItems = [
+  { label: 'CBSE',          tag: 'Board', dot: 'bg-brand-purple' },
+  { label: 'ICSE',          tag: 'Board', dot: 'bg-brand-purple' },
+  { label: 'IB',            tag: 'Board', dot: 'bg-violet-500'   },
+  { label: 'IGCSE',         tag: 'Board', dot: 'bg-violet-500'   },
+  { label: 'NIOS',          tag: 'Board', dot: 'bg-brand-purple' },
+  { label: 'Class 1–12',    tag: 'All',   dot: 'bg-green-500'    },
+  { label: 'JEE Main',      tag: 'Exam',  dot: 'bg-red-500'      },
+  { label: 'JEE Advanced',  tag: 'Exam',  dot: 'bg-red-600'      },
+  { label: 'NEET',          tag: 'Exam',  dot: 'bg-pink-500'     },
+  { label: 'CUET',          tag: 'Exam',  dot: 'bg-indigo-500'   },
+  { label: 'CLAT',          tag: 'Exam',  dot: 'bg-cyan-500'     },
 ];
 
-/* ─── Subjects marquee (Row 1, scrolls LEFT) ─── */
+/* ─── Row 2: Subjects ───────────────────────────── */
 const subjectItems = [
   { label: 'Mathematics',       tag: 'Core',       dot: 'bg-brand-purple' },
-  { label: 'Physics',           tag: 'Science',    dot: 'bg-blue-500' },
-  { label: 'Chemistry',         tag: 'Science',    dot: 'bg-green-500' },
-  { label: 'Biology',           tag: 'Science',    dot: 'bg-emerald-500' },
-  { label: 'English',           tag: 'Language',   dot: 'bg-amber-500' },
-  { label: 'Hindi',             tag: 'Language',   dot: 'bg-orange-400' },
-  { label: 'History',           tag: 'Social',     dot: 'bg-teal-500' },
-  { label: 'Economics',         tag: 'Commerce',   dot: 'bg-yellow-600' },
-  { label: 'Accountancy',       tag: 'Commerce',   dot: 'bg-orange-500' },
-  { label: 'Computer Science',  tag: 'Technology', dot: 'bg-indigo-500' },
-  { label: 'Business Studies',  tag: 'Commerce',   dot: 'bg-amber-600' },
-  { label: 'Social Studies',    tag: 'Social',     dot: 'bg-cyan-500' },
-  { label: 'Sanskrit',          tag: 'Language',   dot: 'bg-rose-400' },
-  { label: 'Geography',         tag: 'Social',     dot: 'bg-lime-500' },
+  { label: 'Science',           tag: 'Core',       dot: 'bg-green-500'    },
+  { label: 'Physics',           tag: 'Science',    dot: 'bg-blue-500'     },
+  { label: 'Chemistry',         tag: 'Science',    dot: 'bg-green-600'    },
+  { label: 'Biology',           tag: 'Science',    dot: 'bg-emerald-500'  },
+  { label: 'English',           tag: 'Language',   dot: 'bg-amber-500'    },
+  { label: 'Accountancy',       tag: 'Commerce',   dot: 'bg-orange-500'   },
+  { label: 'Business Studies',  tag: 'Commerce',   dot: 'bg-amber-600'    },
+  { label: 'Economics',         tag: 'Commerce',   dot: 'bg-yellow-600'   },
+  { label: 'History',           tag: 'Social',     dot: 'bg-teal-500'     },
+  { label: 'Geography',         tag: 'Social',     dot: 'bg-lime-500'     },
+  { label: 'Political Science', tag: 'Social',     dot: 'bg-cyan-600'     },
+  { label: 'Computer Science',  tag: 'Technology', dot: 'bg-indigo-500'   },
+  { label: 'Reasoning',         tag: 'Aptitude',   dot: 'bg-violet-500'   },
+  { label: 'Aptitude',          tag: 'Aptitude',   dot: 'bg-purple-500'   },
 ];
 
-/* ─── Topics marquee (Row 2, scrolls RIGHT) ──── */
-const topicItems = [
-  { label: 'Quadratic Equations',        tag: 'Maths',     color: 'text-brand-purple' },
-  { label: "Newton's Laws of Motion",    tag: 'Physics',   color: 'text-blue-500' },
-  { label: 'Periodic Table & Bonding',   tag: 'Chemistry', color: 'text-green-600' },
-  { label: 'Cell Biology & Genetics',    tag: 'Biology',   color: 'text-emerald-600' },
-  { label: 'Essay Writing & Grammar',    tag: 'English',   color: 'text-amber-600' },
-  { label: 'Indian Freedom Movement',    tag: 'History',   color: 'text-teal-600' },
-  { label: 'Demand & Supply Analysis',   tag: 'Economics', color: 'text-yellow-700' },
-  { label: 'Double Entry Bookkeeping',   tag: 'Accounts',  color: 'text-orange-600' },
-  { label: 'Thermodynamics',             tag: 'Physics',   color: 'text-blue-500' },
-  { label: 'Electromagnetic Waves',      tag: 'Physics',   color: 'text-blue-600' },
-  { label: 'Probability & Statistics',   tag: 'Maths',     color: 'text-brand-purple' },
-  { label: 'Organic Chemistry Reactions',tag: 'Chemistry', color: 'text-green-600' },
-  { label: 'Python Programming Basics',  tag: 'CS',        color: 'text-indigo-600' },
-  { label: 'Indian Constitution',        tag: 'Civics',    color: 'text-cyan-600' },
-  { label: 'Trigonometry & Calculus',    tag: 'Maths',     color: 'text-brand-purple' },
-  { label: 'Climate & Weather Systems',  tag: 'Geography', color: 'text-lime-600' },
+/* ─── Row 3: Skills & Languages ─────────────────── */
+const skillItems = [
+  { label: 'Coding',                       tag: 'Technology', dot: 'bg-indigo-500' },
+  { label: 'Artificial Intelligence (AI)', tag: 'Technology', dot: 'bg-violet-500' },
+  { label: 'Spoken English',               tag: 'Language',   dot: 'bg-amber-500'  },
+  { label: 'French',                        tag: 'Language',   dot: 'bg-blue-500'   },
+  { label: 'German',                        tag: 'Language',   dot: 'bg-red-500'    },
+  { label: 'Spanish',                       tag: 'Language',   dot: 'bg-orange-500' },
+  { label: 'Japanese',                      tag: 'Language',   dot: 'bg-pink-500'   },
+  { label: 'Hindi',                         tag: 'Language',   dot: 'bg-rose-400'   },
+  { label: 'Sanskrit',                      tag: 'Language',   dot: 'bg-amber-600'  },
 ];
 
-/* Duplicate arrays so the marquee loops seamlessly */
+/* Duplicate each array so the marquee loops seamlessly */
+const boardsDouble   = [...boardItems,   ...boardItems];
 const subjectsDouble = [...subjectItems, ...subjectItems];
-const topicsDouble   = [...topicItems,   ...topicItems];
+const skillsDouble   = [...skillItems,   ...skillItems];
 
 export function ServicesSection() {
   const { ref, isInView } = useScrollAnimation<HTMLElement>();
-  const [activeBoard, setActiveBoard] = useState('cbse');
 
   return (
     <section
@@ -92,7 +92,7 @@ export function ServicesSection() {
             What Can You{' '}
             <span className="relative inline-block">
               <span className="text-brand-yellow">Learn?</span>
-              {/* Orange underline accent */}
+              {/* Yellow underline accent */}
               <span
                 className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full bg-brand-yellow"
                 aria-hidden="true"
@@ -100,53 +100,27 @@ export function ServicesSection() {
             </span>
           </h2>
           <p className="text-neutral-500 text-base mt-3 max-w-xl mx-auto leading-relaxed">
-            Real subjects, real tutors — explore everything we teach across all boards.
+            From school subjects to competitive exams — covering every board, subject, language and skill.
           </p>
-        </motion.div>
-
-        {/* ── Board Tab Bar (fixed / always visible) ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.45, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-2 mb-8"
-        >
-          {boardTabs.map((board) => (
-            <button
-              key={board.id}
-              onClick={() => setActiveBoard(board.id)}
-              aria-pressed={activeBoard === board.id}
-              className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
-                activeBoard === board.id
-                  ? 'bg-brand-purple text-white border-brand-purple shadow-card'
-                  : 'bg-white text-neutral-600 border-neutral-200 hover:border-brand-purple/40 hover:text-brand-purple hover:bg-brand-purple-light'
-              }`}
-            >
-              {board.label}
-            </button>
-          ))}
         </motion.div>
       </div>
 
-      {/* ─────────────────────────────────────────────────────── */}
-      {/* Marquee rows — full bleed (no max-w wrapper)           */}
-      {/* ─────────────────────────────────────────────────────── */}
+      {/* ── Marquee Rows — full bleed (no max-w wrapper) ── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.2 }}
         className="flex flex-col gap-3"
       >
-        {/* ── Row 1: Subjects → scrolls LEFT ── */}
+
+        {/* ── Row 1: Boards & Exams → scrolls LEFT ── */}
         <div className="relative overflow-hidden">
-          {/* Fade masks on edges */}
           <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-[#faf9ff] to-transparent" aria-hidden="true" />
           <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-[#faf9ff] to-transparent" aria-hidden="true" />
-
           <div className="flex animate-marquee-left whitespace-nowrap">
-            {subjectsDouble.map((item, i) => (
+            {boardsDouble.map((item, i) => (
               <div
-                key={`s-${i}`}
+                key={`b-${i}`}
                 className="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 bg-white rounded-full border border-neutral-200/80 shadow-soft flex-shrink-0 hover:border-brand-purple/30 hover:shadow-card transition-all duration-200 cursor-default group"
               >
                 <span className={`w-2 h-2 rounded-full flex-shrink-0 ${item.dot}`} aria-hidden="true" />
@@ -161,24 +135,43 @@ export function ServicesSection() {
           </div>
         </div>
 
-        {/* ── Row 2: Topics → scrolls RIGHT ── */}
+        {/* ── Row 2: Subjects → scrolls RIGHT ── */}
         <div className="relative overflow-hidden">
-          {/* Fade masks on edges */}
           <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-[#faf9ff] to-transparent" aria-hidden="true" />
           <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-[#faf9ff] to-transparent" aria-hidden="true" />
-
           <div className="flex animate-marquee-right whitespace-nowrap">
-            {topicsDouble.map((item, i) => (
+            {subjectsDouble.map((item, i) => (
               <div
-                key={`t-${i}`}
+                key={`s-${i}`}
                 className="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 bg-white rounded-full border border-neutral-200/80 shadow-soft flex-shrink-0 hover:border-brand-yellow/40 hover:shadow-card transition-all duration-200 cursor-default group"
               >
-                {/* Dot — orange accent for topics */}
-                <span className="w-2 h-2 rounded-full flex-shrink-0 bg-brand-yellow" aria-hidden="true" />
+                <span className={`w-2 h-2 rounded-full flex-shrink-0 ${item.dot}`} aria-hidden="true" />
                 <span className="text-sm font-semibold text-neutral-800 group-hover:text-brand-purple transition-colors duration-200">
                   {item.label}
                 </span>
-                <span className={`text-[11px] font-bold ${item.color}`}>
+                <span className="text-[11px] font-medium text-neutral-400 bg-neutral-100 px-2 py-0.5 rounded-full">
+                  {item.tag}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Row 3: Skills & Languages → scrolls LEFT ── */}
+        <div className="relative overflow-hidden">
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-[#faf9ff] to-transparent" aria-hidden="true" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-[#faf9ff] to-transparent" aria-hidden="true" />
+          <div className="flex animate-marquee-left whitespace-nowrap">
+            {skillsDouble.map((item, i) => (
+              <div
+                key={`k-${i}`}
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 bg-white rounded-full border border-neutral-200/80 shadow-soft flex-shrink-0 hover:border-brand-purple/30 hover:shadow-card transition-all duration-200 cursor-default group"
+              >
+                <span className={`w-2 h-2 rounded-full flex-shrink-0 ${item.dot}`} aria-hidden="true" />
+                <span className="text-sm font-semibold text-neutral-800 group-hover:text-brand-purple transition-colors duration-200">
+                  {item.label}
+                </span>
+                <span className="text-[11px] font-medium text-neutral-400 bg-neutral-100 px-2 py-0.5 rounded-full">
                   {item.tag}
                 </span>
               </div>

@@ -1,53 +1,47 @@
 import type { Testimonial } from '../types/testimonial';
 
 /**
- * Mock testimonial data — realistic parent/student reviews
- * Replace with API call to GET /api/testimonials when backend is ready.
+ * Testimonials — real parent & student reviews
+ *
+ * Future Google Business integration:
+ * 1. Fetch reviews from Google Business Profile API.
+ * 2. Map each review to this Testimonial interface.
+ * 3. The TestimonialsSection carousel renders them automatically — no JSX changes needed.
+ *
+ * Fields:
+ *   id          — unique identifier
+ *   quote       — review text
+ *   authorName  — reviewer's name
+ *   authorRole  — role + location (e.g. "Parent · Sector 50, Noida")
+ *   rating      — star rating (1–5)
+ *   subject?    — optional subject the tutor taught
  */
 export const testimonials: Testimonial[] = [
   {
     id: 'testimonial-001',
     quote:
-      'HomeTutorsWorld helped us find the perfect tutor for our daughter. Her grades improved dramatically and she became much more confident in her studies. Highly recommend!',
-    authorName: 'Ritu Malhotra',
-    authorRole: 'Mother of Class 8 Student',
+      'Found an excellent Maths tutor for my son in Sector 50, Noida within just 24 hours. The personalized one-to-one approach has significantly improved his board exam scores. Highly recommend HomeTutorsWorld!',
+    authorName: 'Priya Malhotra',
+    authorRole: 'Parent · Sector 50, Noida',
     rating: 5,
     subject: 'Mathematics',
   },
   {
     id: 'testimonial-002',
     quote:
-      'We were struggling to find a reliable Physics tutor for JEE preparation. HomeTutorsWorld connected us with an exceptional tutor within 24 hours. My son scored 95 percentile!',
-    authorName: 'Rajesh Khanna',
-    authorRole: 'Father of Class 12 Student',
+      "Exceptional service! They matched us with a brilliant Physics and Chemistry tutor for JEE Advanced preparation. My daughter's confidence has improved dramatically and the free demo class made choosing so easy.",
+    authorName: 'Rajesh Sharma',
+    authorRole: 'Parent · Greater Noida West',
     rating: 5,
-    subject: 'Physics',
+    subject: 'JEE Preparation',
   },
   {
     id: 'testimonial-003',
     quote:
-      "The demo class was free and convincing. Our tutor's teaching style perfectly matched our child's learning pace. We've seen tremendous improvement in just 3 months.",
-    authorName: 'Sunita Sharma',
-    authorRole: 'Parent of Class 5 Student',
+      'Outstanding experience from start to finish. The CBSE English tutor was patient, knowledgeable and truly committed to my child\'s progress. Results improved in just two months. Will definitely recommend to all parents!',
+    authorName: 'Sunita Verma',
+    authorRole: 'Parent · Gamma, Greater Noida',
     rating: 5,
-    subject: 'All Subjects',
-  },
-  {
-    id: 'testimonial-004',
-    quote:
-      'Excellent service! The tutor they assigned for NEET Chemistry preparation is knowledgeable, patient, and very effective. My daughter cleared NEET in the first attempt.',
-    authorName: 'Vikram Patel',
-    authorRole: 'Father of NEET Student',
-    rating: 5,
-    subject: 'Chemistry',
-  },
-  {
-    id: 'testimonial-005',
-    quote:
-      'Finding a good English tutor was always difficult. HomeTutorsWorld matched us with a brilliant teacher who improved my son\'s writing skills significantly in just 2 months.',
-    authorName: 'Ananya Bose',
-    authorRole: 'Mother of Class 10 Student',
-    rating: 4,
     subject: 'English',
   },
 ];

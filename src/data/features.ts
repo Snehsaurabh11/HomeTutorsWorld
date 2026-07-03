@@ -1,36 +1,39 @@
 import type { Feature } from '../types/common';
 
 /**
- * "Why Choose Us" feature cards data
- * Replace icon string with actual Lucide icon name
+ * "Why Choose Us" feature cards — real business content
  */
 export const features: Feature[] = [
   {
     id: 'feature-01',
     icon: 'ShieldCheck',
-    title: 'Expert Tutors',
-    description: 'Experienced and background-verified tutors with proven track records.',
+    title: 'Experienced & Verified Tutors',
+    description:
+      'Every tutor is thoroughly screened for academic background, teaching experience, and communication skills before being listed.',
     color: 'text-brand-purple',
   },
   {
     id: 'feature-02',
-    icon: 'Laptop',
-    title: 'Flexible Learning',
-    description: 'Choose between home tuition or online classes — whatever suits you best.',
-    color: 'text-brand-yellow',
+    icon: 'BookOpen',
+    title: 'All Major Boards Covered',
+    description:
+      'CBSE, ICSE, IB, IGCSE, State Boards, and NIOS — we cover them all with dedicated subject-specific expertise.',
+    color: 'text-blue-500',
   },
   {
     id: 'feature-03',
-    icon: 'Wallet',
-    title: 'Affordable Fees',
-    description: 'Quality education at reasonable, transparent prices. No hidden charges.',
+    icon: 'Target',
+    title: 'Academic & Competitive Exam Support',
+    description:
+      'From school subjects to JEE, NEET, CUET, and CLAT — comprehensive coaching tailored to every learning goal.',
     color: 'text-green-500',
   },
   {
     id: 'feature-04',
-    icon: 'HeartHandshake',
-    title: 'Students First',
-    description: 'We focus entirely on student growth, confidence, and academic success.',
+    icon: 'Calendar',
+    title: 'Flexible Scheduling',
+    description:
+      'Choose your preferred time, location, and learning mode — home tuition or live online classes, completely on your terms.',
     color: 'text-rose-500',
   },
 ];

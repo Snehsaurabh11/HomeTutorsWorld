@@ -34,17 +34,17 @@ export function BecomeTutorSection() {
               className="p-8 md:p-12"
             >
               <span className="inline-flex items-center gap-2 px-3 py-1 bg-brand-purple-light text-brand-purple text-xs font-bold rounded-full mb-5 tracking-wide uppercase">
-                🎓 Join Our Network
+                🎓 Passionate about teaching?
               </span>
 
               <h2
                 id="become-tutor-heading"
                 className="font-display font-black text-neutral-900 text-3xl md:text-4xl leading-tight tracking-tight"
               >
-                Become a Tutor
+                Join Our Growing Tutor Network
               </h2>
               <p className="text-neutral-500 text-base mt-3 leading-relaxed max-w-sm">
-                Join our community of expert educators and make a difference in students' lives.
+                Join HomeTutorsWorld to connect with students, teach online or offline and grow your teaching career with flexible opportunities.
               </p>
 
               <ul className="flex flex-col gap-3 mt-7">
@@ -61,7 +61,7 @@ export function BecomeTutorSection() {
               <div className="mt-8">
                 <Link to={ROUTES.BECOME_TUTOR}>
                   <Button variant="primary" size="md" id="become-tutor-cta">
-                    Join as a Tutor
+                    Register as a Tutor
                   </Button>
                 </Link>
               </div>

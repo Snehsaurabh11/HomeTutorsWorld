@@ -25,14 +25,14 @@ export function WhyChooseUsSection() {
           transition={{ duration: 0.5 }}
         >
           <SectionHeader
-            eyebrow="Why Us"
+            eyebrow="Why Choose Us"
             title={
               <>
-                Why Choose{' '}
-                <span className="text-brand-purple">HomeTutorsWorld?</span>
+                Why Thousands of Families Choose{' '}
+                <span className="text-brand-purple">HomeTutorsWorld</span>
               </>
             }
-            subtitle="Trusted by 10,000+ families across India for quality home and online tuition."
+            subtitle="Our carefully selected tutors focus on concept clarity, confidence building and long-term academic success through personalized one-to-one learning."
             align="center"
           />
         </motion.div>

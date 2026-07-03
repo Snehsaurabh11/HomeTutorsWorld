@@ -4,21 +4,35 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LeadForm } from '../components/LeadForm';
 import { Button } from '../components/ui/Button';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Phone } from 'lucide-react';
 import { ROUTES } from '../constants/routes';
 import { APP_CONFIG } from '../constants/config';
 
+/**
+ * Highlight tags shown below the H1
+ */
 const heroHighlights = [
-  'Verified tutors',
-  'Personalized learning',
-  'Free demo class',
+  'Verified Tutors',
+  'Personalized Learning',
+  'Home & Online Classes',
+  'Free Trial Class',
 ];
 
+/**
+ * Rotating keyword sequence — only the middle word animates
+ * The city suffix "in Noida, Greater Noida & Greater Noida West" stays static
+ */
 const rotatingWords = [
-  'Math Tutor',
+  'Home Tutor',
+  'Home Tuition',
+  'CBSE Home Tutor',
+  'Maths Tutor',
   'Science Tutor',
-  'Physics Tutor',
-  'English Tutor',
+  'Female Home Tutor',
+  'JEE Faculty',
+  'NEET Mentor',
+  'IB & IGCSE Tutor',
+  'Coding & AI Tutor',
 ];
 
 const fadeUp: Variants = {
@@ -32,6 +46,7 @@ const fadeUp: Variants = {
 
 /**
  * HeroSection — above-the-fold section with tagline and inline lead form
+ * H1 structure: "Find the Best [rotating keyword] in Noida, Greater Noida & Greater Noida West"
  */
 export function HeroSection() {
   const [wordIndex, setWordIndex] = useState(0);
@@ -51,7 +66,7 @@ export function HeroSection() {
 
   return (
     <section
-     className="relative overflow-hidden flex items-center bg-gradient-to-br from-[#efe8ff] via-[#e8deff] to-[#ddd0ff]"
+      className="relative overflow-hidden flex items-center bg-gradient-to-br from-[#efe8ff] via-[#e8deff] to-[#ddd0ff]"
       aria-label="Hero section"
     >
       {/* Background grid dots */}
@@ -77,56 +92,58 @@ export function HeroSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+
           {/* Left — Copy */}
           <div>
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              custom={0}
-              variants={fadeUp}
-            >
+            {/* Trust badge */}
+            <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-purple-light text-brand-purple text-xs font-bold rounded-full mb-5 tracking-wide uppercase">
-                ✨ {APP_CONFIG.tagline}
+                🌟 Trusted Home &amp; Online Tutors in Delhi NCR
               </span>
             </motion.div>
 
+            {/* H1 — only ONE H1 on the homepage */}
             <motion.h1
               initial="hidden"
               animate="visible"
               custom={0.08}
               variants={fadeUp}
-              className="font-display font-black text-neutral-900 text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.1] tracking-tight"
+              className="font-display font-black text-neutral-900 text-4xl sm:text-5xl lg:text-[3.2rem] leading-[1.15] tracking-tight"
             >
-              Find The Best
-              <br className="hidden sm:block" />
-              <span className="inline-flex items-center gap-3 mt-2 sm:mt-0">
-                <span
-                  className={`relative inline-block text-brand-yellow-dark transition-opacity duration-300 ${
-                    isFading ? 'opacity-0' : 'opacity-100'
-                  }`}
-                >
-                  {rotatingWords[wordIndex]}
-                </span>
+              Find the Best
+              <br />
+              <span
+                className={`inline-block text-brand-yellow-dark transition-opacity duration-300 ${
+                  isFading ? 'opacity-0' : 'opacity-100'
+                }`}
+              >
+                {rotatingWords[wordIndex]}
+              </span>
+              <br />
+              
+              <span className="text-xl sm:text-2xl lg:text-[1.75rem] font-bold text-neutral-600 leading-relaxed">
+                in Noida, Greater Noida &amp; Greater Noida West 
               </span>
             </motion.h1>
 
+            {/* Description */}
             <motion.p
               initial="hidden"
               animate="visible"
               custom={0.18}
               variants={fadeUp}
-              className="text-neutral-500 text-base mt-4 max-w-[440px] leading-relaxed"
+              className="text-neutral-500 text-base mt-4 max-w-[460px] leading-relaxed"
             >
-              Verified tutors, personalized plans, and flexible demo classes for better learning outcomes.
+              Connecting students with verified, experienced home tutors and online educators for CBSE, ICSE, IB, IGCSE, JEE, NEET, CUET, CLAT, Class 1–12, languages, coding and AI.
             </motion.p>
 
-            {/* Highlights */}
+            {/* Highlight tags — 4 items, 2×2 on mobile, 4-col on sm+ */}
             <motion.ul
               initial="hidden"
               animate="visible"
               custom={0.28}
               variants={fadeUp}
-              className="grid grid-cols-3 gap-2.5 mt-7"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-7"
             >
               {heroHighlights.map((item) => (
                 <li
@@ -141,17 +158,27 @@ export function HeroSection() {
               ))}
             </motion.ul>
 
-            {/* Mobile CTA (form is below on mobile) */}
+            {/* CTA Buttons — visible on all screen sizes */}
             <motion.div
               initial="hidden"
               animate="visible"
               custom={0.36}
               variants={fadeUp}
-              className="mt-7 flex items-center gap-4 lg:hidden"
+              className="mt-7 flex items-center gap-3 flex-wrap"
             >
+              <a href={`tel:${APP_CONFIG.phone.replace(/\s/g, '')}`}>
+                <Button
+                  variant="primary"
+                  size="md"
+                  leftIcon={<Phone className="w-4 h-4" />}
+                  id="hero-cta-book-trial"
+                >
+                  Book Free Trial
+                </Button>
+              </a>
               <Link to={ROUTES.REQUEST_TUTOR}>
-                <Button variant="primary" size="lg" id="hero-mobile-cta">
-                  Request a Tutor
+                <Button variant="outline" size="md" id="hero-cta-find-tutor">
+                  Find a Tutor
                 </Button>
               </Link>
             </motion.div>

@@ -3,32 +3,50 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SectionHeader } from '../components/SectionHeader';
 import { ChevronDown } from 'lucide-react';
 
-const faqs = [
+/**
+ * FAQ data — add/remove questions by editing this array only.
+ * No JSX changes needed.
+ */
+const faqs: { question: string; answer: string }[] = [
   {
-    question: 'How quickly can I get a tutor?',
-    answer:    'Once you submit the form, our team reviews your request and matches you with a qualified tutor within 24 hours.',
+    question: 'Do you provide home tuition?',
+    answer:
+      'Yes. We connect students with experienced, background-verified home tutors who visit at your preferred time and location. We currently serve Noida, Greater Noida, Greater Noida West and nearby areas of Delhi NCR.',
   },
   {
-    question: 'Do tutors provide online classes as well?',
-    answer:    'Yes. We offer both home tuition and online tutoring options depending on your preference.',
+    question: 'Do you offer online classes?',
+    answer:
+      'Yes. We provide live, one-to-one online tutoring sessions for all subjects, boards and competitive exams. Online classes are available across India — from any device, at any convenient time.',
   },
   {
-    question: 'Are tutors verified before matching?',
-    answer:    'Absolutely. All tutors are vetted for experience, qualifications, and teaching ability before they are listed.',
+    question: 'Which boards do you cover?',
+    answer:
+      'We cover all major boards — CBSE, ICSE, IB, IGCSE, NIOS and State Boards — for Class 1 through 12. We also offer expert coaching for competitive exams including JEE Main, JEE Advanced, NEET, CUET and CLAT.',
   },
   {
-    question: 'Can I request a free demo session?',
-    answer:    'Yes. Many tutors offer a free demo class so you can judge the teaching style before committing.',
+    question: 'Is a demo class available?',
+    answer:
+      "Yes. We offer a free demo class so you can evaluate the tutor's teaching style, subject knowledge and compatibility with your child — before committing to regular sessions. No obligation involved.",
   },
   {
-    question: 'How do I become a tutor?',
-    answer:    'Visit our Become a Tutor page, submit your application, and our team will reach out with the next steps.',
+    question: 'Which classes do you teach?',
+    answer:
+      'We provide tutors for Nursery/KG through Class 12 across all streams — Science, Commerce and Arts. We also support competitive exam aspirants and learners of coding, Artificial Intelligence (AI) and foreign languages.',
+  },
+  {
+    question: 'Can I choose my preferred tutor?',
+    answer:
+      "Yes. After understanding your requirements, our academic team suggests the most suitable tutors. You can review their profile, subject expertise and teaching mode — and make your final decision after the free demo class.",
+  },
+  {
+    question: 'Do you provide tutors for Coding and AI?',
+    answer:
+      'Yes. We offer specialized tutors for Coding (Python, Java, Web Development) and Artificial Intelligence (AI). These personalized sessions are available as home visits or live online classes, suitable for school students and beginners alike.',
   },
 ];
 
 /**
- * FAQSection — premium accordion with smooth expand/collapse
- * Replaced native <details> with React state for animation control
+ * FAQSection — premium accordion with smooth expand/collapse via Framer Motion
  */
 export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -65,7 +83,13 @@ export function FAQSection() {
                   aria-expanded={isOpen}
                   className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left group"
                 >
-                  <span className={`font-display font-semibold text-base leading-snug transition-colors duration-200 ${isOpen ? 'text-brand-purple' : 'text-neutral-900 group-hover:text-brand-purple'}`}>
+                  <span
+                    className={`font-display font-semibold text-base leading-snug transition-colors duration-200 ${
+                      isOpen
+                        ? 'text-brand-purple'
+                        : 'text-neutral-900 group-hover:text-brand-purple'
+                    }`}
+                  >
                     {faq.question}
                   </span>
                   <span

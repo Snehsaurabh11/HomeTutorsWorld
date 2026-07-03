@@ -8,16 +8,16 @@ const steps = [
     id:          'step-01',
     number:      '01',
     icon:        ClipboardList,
-    title:       'Submit Requirement',
-    description: 'Tell us your subject, board, class, and location. Takes less than 2 minutes.',
+    title:       'Share Your Requirement',
+    description: 'Tell us your class, board, subject, preferred schedule and location.',
     color:       'bg-brand-purple-light text-brand-purple',
   },
   {
     id:          'step-02',
     number:      '02',
     icon:        UserCheck,
-    title:       'Get Matched',
-    description: 'Our team handpicks verified tutors based on your requirements within 24 hours.',
+    title:       'Get Matched with the Right Tutor',
+    description: 'Our academic experts recommend tutors based on your learning needs.',
     color:       'bg-violet-50 text-violet-600',
   },
   {
@@ -25,7 +25,7 @@ const steps = [
     number:      '03',
     icon:        GraduationCap,
     title:       'Start Learning',
-    description: 'Begin with a free demo class. If satisfied, continue with flexible scheduling.',
+    description: "Book a free demo class and continue only when you're completely satisfied.",
     color:       'bg-indigo-50 text-indigo-600',
   },
 ];
@@ -52,7 +52,7 @@ export function HowItWorksSection() {
         >
           <SectionHeader
             eyebrow="How It Works"
-            title={<>3 Simple Steps to Find Your Tutor</>}
+            title={<>Get Started in 3 Easy Steps</>}
             subtitle="From first enquiry to your first class — fast and worry-free."
             align="center"
           />

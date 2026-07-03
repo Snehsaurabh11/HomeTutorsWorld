@@ -42,9 +42,9 @@ export function TestimonialsSection() {
           <SectionHeader
             eyebrow="Testimonials"
             title={
-              <>What Parents <span className="text-brand-purple">Say About Us</span></>
+              <>What Parents &amp; Students <span className="text-brand-purple">Say About Us</span></>
             }
-            subtitle="Trusted by thousands of families across Delhi NCR."
+            subtitle="Trusted by families for quality teaching, personalized guidance and reliable tutor matching."
             align="center"
           />
         </motion.div>

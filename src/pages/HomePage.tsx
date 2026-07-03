@@ -3,7 +3,6 @@ import { WhyChooseUsSection } from '../sections/WhyChooseUsSection';
 import { HowItWorksSection } from '../sections/HowItWorksSection';
 import { ServicesSection } from '../sections/ServicesSection';
 import { ServiceLocationsSection } from '../sections/ServiceLocationsSection';
-import { TopTutorsSection } from '../sections/TopTutorsSection';
 import { TestimonialsSection } from '../sections/TestimonialsSection';
 import { BecomeTutorSection } from '../sections/BecomeTutorSection';
 import { FAQSection } from '../sections/FAQSection';
@@ -35,7 +34,6 @@ export function HomePage() {
       <HowItWorksSection />
       <ServicesSection />
       <ServiceLocationsSection />
-      <TopTutorsSection />
       <TestimonialsSection />
       <BecomeTutorSection />
       <FAQSection />
