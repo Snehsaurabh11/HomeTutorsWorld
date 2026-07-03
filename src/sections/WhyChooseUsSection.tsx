@@ -34,6 +34,7 @@ export function WhyChooseUsSection() {
             }
             subtitle="Our carefully selected tutors focus on concept clarity, confidence building and long-term academic success through personalized one-to-one learning."
             align="center"
+            highlighted
           />
         </motion.div>
 

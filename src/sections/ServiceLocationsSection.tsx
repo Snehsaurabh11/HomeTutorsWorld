@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { SectionHeader } from '../components/SectionHeader';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { ROUTES } from '../constants/routes';
+import { MAPS_CONFIG } from '../constants/config';
 
 /**
  * Location data — edit these arrays to add/remove locations.
@@ -101,6 +102,7 @@ export function ServiceLocationsSection() {
             title={<>Currently Serving Across Delhi NCR</>}
             subtitle="Trusted home and online tutors in Noida, Greater Noida and Greater Noida West — with more cities launching soon."
             align="center"
+            highlighted
           />
         </motion.div>
 
@@ -113,7 +115,7 @@ export function ServiceLocationsSection() {
         >
           <iframe
             title="HomeTutorsWorld Service Locations — Noida, Greater Noida, Greater Noida West"
-            src="https://www.google.com/maps?q=Noida+Greater+Noida+Delhi+NCR&output=embed"
+            src={MAPS_CONFIG.serviceLocationsUrl}
             width="100%"
             height="380"
             style={{ border: 0, display: 'block' }}

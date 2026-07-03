@@ -137,23 +137,21 @@ export function HeroSection() {
               Connecting students with verified, experienced home tutors and online educators for CBSE, ICSE, IB, IGCSE, JEE, NEET, CUET, CLAT, Class 1–12, languages, coding and AI.
             </motion.p>
 
-            {/* Highlight tags — 4 items, 2×2 on mobile, 4-col on sm+ */}
+            {/* Highlight tags — compact inline row */}
             <motion.ul
               initial="hidden"
               animate="visible"
               custom={0.28}
               variants={fadeUp}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-7"
+              className="flex flex-wrap gap-x-5 gap-y-2 mt-5"
             >
               {heroHighlights.map((item) => (
                 <li
                   key={item}
-                  className="rounded-2xl bg-white/80 border border-brand-purple/10 p-3 text-center text-xs font-semibold text-neutral-700 shadow-soft backdrop-blur-sm"
+                  className="flex items-center gap-1.5 text-sm font-semibold text-neutral-700"
                 >
-                  <span className="inline-flex items-center justify-center w-7 h-7 mx-auto mb-1.5 rounded-full bg-brand-purple-light text-brand-purple">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                  </span>
-                  <div>{item}</div>
+                  <CheckCircle2 className="w-4 h-4 text-brand-purple flex-shrink-0" />
+                  {item}
                 </li>
               ))}
             </motion.ul>
@@ -183,19 +181,19 @@ export function HeroSection() {
               </Link>
             </motion.div>
 
-            {/* Stats row */}
+            {/* Stats row — compact */}
             <motion.div
               initial="hidden"
               animate="visible"
               custom={0.44}
               variants={fadeUp}
-              className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 w-full"
+              className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5 w-full"
             >
               {Object.entries(APP_CONFIG.stats).map(([key, value]) => (
                 <div key={key} className="text-center">
-                  <div className="rounded-2xl bg-white/80 backdrop-blur-sm p-3.5 shadow-soft border border-brand-purple/10">
-                    <div className="font-display font-black text-xl text-brand-purple">{value}</div>
-                    <div className="text-[11px] text-neutral-400 mt-1 capitalize font-medium">
+                  <div className="rounded-xl bg-white/80 backdrop-blur-sm p-2.5 shadow-soft border border-brand-purple/10">
+                    <div className="font-display font-black text-lg text-brand-purple">{value}</div>
+                    <div className="text-[10px] text-neutral-400 mt-0.5 capitalize font-medium">
                       {key.replace(/([A-Z])/g, ' $1').trim()}
                     </div>
                   </div>

@@ -46,6 +46,7 @@ export function TestimonialsSection() {
             }
             subtitle="Trusted by families for quality teaching, personalized guidance and reliable tutor matching."
             align="center"
+            highlighted
           />
         </motion.div>
 
