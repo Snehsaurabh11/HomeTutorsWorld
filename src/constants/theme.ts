@@ -50,6 +50,7 @@ export const GRADE_OPTIONS = [
 ] as const;
 
 // Subject options for forms
+// Used in both the lead form (single select) and tutor registration (multi-select)
 export const SUBJECT_OPTIONS = [
   'Mathematics',
   'Physics',
@@ -60,18 +61,34 @@ export const SUBJECT_OPTIONS = [
   'History',
   'Geography',
   'Economics',
-  'Accountancy',
   'Business Studies',
+  'Accountancy',
+  'Political Science',
   'Computer Science',
-  'Science (General)',
-  'Social Studies',
+  'Science',
   'Sanskrit',
-  'All Subjects',
+  'French',
+  'German',
+  'Spanish',
+  'Japanese',
+  'Coding',
+  'Artificial Intelligence (AI)',
+  'Spoken English',
+  'Reasoning',
+  'Aptitude',
+  'Other',
 ] as const;
 
 // Teaching mode options
 export const TEACHING_MODE_OPTIONS = [
   'Home Tuition',
-  'Online Classes',
-  'Both (Home + Online)',
+  'Online',
+  'Both',
+] as const;
+
+// Preferred mode options (lead form)
+export const PREFERRED_MODE_OPTIONS = [
+  { value: 'Home Tuition', label: 'Home Tuition' },
+  { value: 'Online',       label: 'Online Classes' },
+  { value: 'Both',         label: 'Both (Home + Online)' },
 ] as const;

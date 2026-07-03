@@ -7,6 +7,7 @@ import { APP_CONFIG } from '../constants/config';
 import { useForm } from 'react-hook-form';
 import { cn } from '../utils/cn';
 
+
 interface ContactFormData {
   name: string;
   email: string;

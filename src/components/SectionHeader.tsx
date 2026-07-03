@@ -67,7 +67,7 @@ export function SectionHeader({
     return (
       <div
         className={cn(
-          'bg-brand-purple-dark/[0.07] rounded-2xl px-6 py-6',
+          'bg-brand-purple-dark/[0.15] rounded-2xl px-6 py-6',
           align === 'center' && 'flex flex-col items-center text-center',
           align === 'left'   && 'flex flex-col items-start text-left',
           align === 'right'  && 'flex flex-col items-end text-right',

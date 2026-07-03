@@ -1,5 +1,5 @@
 // Lead form submission type
-// Structured for future EmailJS / API integration
+// Structured for EmailJS / API integration
 
 export type LeadSource = 'hero-form' | 'request-tutor-page' | 'popup' | 'footer';
 
@@ -7,8 +7,9 @@ export interface LeadFormData {
   parentName: string;
   phone: string;
   grade: string;
-  subject: string;
+  subjects: string[];      // multi-select
   city: string;
+  locality?: string;       // e.g. "Sector 62", "Gaur City"
   message?: string;
   source?: LeadSource;
 }

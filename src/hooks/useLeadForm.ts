@@ -11,6 +11,9 @@ import { EMAIL_CONFIG } from '../constants/config';
  *
  * EmailJS credentials are loaded from environment variables.
  * Set VITE_EMAILJS_* values in your .env file (see .env.example).
+ *
+ * NOTE: EmailJS template should use {{subjects}} (comma-separated list)
+ * and {{locality}} (locality / sector field).
  */
 export function useLeadForm(source: LeadFormData['source'] = 'hero-form') {
   const navigate = useNavigate();
@@ -22,11 +25,12 @@ export function useLeadForm(source: LeadFormData['source'] = 'hero-form') {
   const methods = useForm<LeadFormData>({
     defaultValues: {
       parentName: '',
-      phone: '',
-      grade: '',
-      subject: '',
-      city: '',
-      message: '',
+      phone:      '',
+      grade:      '',
+      subjects:   [],
+      city:       '',
+      locality:   '',
+      message:    '',
       source,
     },
     mode: 'onTouched',
@@ -43,8 +47,9 @@ export function useLeadForm(source: LeadFormData['source'] = 'hero-form') {
           parentName: data.parentName,
           phone:      data.phone,
           grade:      data.grade,
-          subject:    data.subject,
+          subjects:   data.subjects.join(', '),
           city:       data.city,
+          locality:   data.locality || 'Not specified',
           message:    data.message,
           source:     data.source,
         },

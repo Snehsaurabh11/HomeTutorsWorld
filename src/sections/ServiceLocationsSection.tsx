@@ -50,7 +50,7 @@ function LocationGroup({
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.45, delay }}
-      className="bg-white rounded-2xl border border-neutral-200/80 shadow-card p-5"
+      className="bg-brand-purple/10 rounded-2xl border border-neutral-200/80 shadow-card p-5"
     >
       <h3 className="font-display font-bold text-neutral-900 text-base mb-3 flex items-center gap-2">
         {icon}
