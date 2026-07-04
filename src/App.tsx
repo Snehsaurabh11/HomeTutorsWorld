@@ -1,4 +1,7 @@
 import { WhatsAppButton } from './components/WhatsAppButton';
+import { ScrollToTop } from './components/ScrollToTop';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { TermsPage } from './pages/TermsPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './layouts/MainLayout';
 import { MinimalLayout } from './layouts/MinimalLayout';
@@ -18,6 +21,7 @@ import { ROUTES } from './constants/routes';
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         {/* Main layout routes (with Navbar + Footer) */}
         <Route element={<MainLayout />}>
@@ -29,6 +33,8 @@ function App() {
           <Route path={ROUTES.SERVICES} element={<SubjectsPage />} />
           <Route path={ROUTES.ABOUT} element={<div className="py-32 text-center text-neutral-400">About page coming soon</div>} />
           <Route path={ROUTES.CONTACT} element={<ContactPage />} />
+          <Route path={ROUTES.PRIVACY_POLICY} element={<PrivacyPolicyPage />} />
+          <Route path={ROUTES.TERMS} element={<TermsPage />} />
         </Route>
 
         {/* Minimal layout routes (no Navbar/Footer) */}

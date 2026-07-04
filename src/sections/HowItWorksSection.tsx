@@ -55,6 +55,7 @@ export function HowItWorksSection() {
             title={<>Get Started in 3 Easy Steps</>}
             subtitle="From first enquiry to your first class — fast and worry-free."
             align="center"
+            highlighted
           />
         </motion.div>
 

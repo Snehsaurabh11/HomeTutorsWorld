@@ -108,7 +108,7 @@ export function HeroSection() {
               animate="visible"
               custom={0.08}
               variants={fadeUp}
-              className="font-display font-black text-neutral-900 text-4xl sm:text-5xl lg:text-[3.2rem] leading-[1.15] tracking-tight"
+              className="font-display font-black text-neutral-900 text-3xl sm:text-4xl lg:text-[3.2rem] leading-[1.15] tracking-tight"
             >
               Find the Best
               <br />
@@ -121,8 +121,8 @@ export function HeroSection() {
               </span>
               <br />
               
-              <span className="text-xl sm:text-2xl lg:text-[1.75rem] font-bold text-neutral-600 leading-relaxed">
-                in Noida, Greater Noida &amp; Greater Noida West 
+              <span className="text-base sm:text-xl lg:text-[1.6rem] font-bold text-neutral-600 leading-relaxed">
+                in Noida, Greater Noida &amp; Greater Noida West
               </span>
             </motion.h1>
 

@@ -47,7 +47,7 @@ export function useLeadForm(source: LeadFormData['source'] = 'hero-form') {
           parentName: data.parentName,
           phone:      data.phone,
           grade:      data.grade,
-          subjects:   data.subjects.join(', '),
+          subject:   data.subjects.join(', '),
           city:       data.city,
           locality:   data.locality || 'Not specified',
           message:    data.message,
