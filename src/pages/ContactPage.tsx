@@ -1,20 +1,11 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, MessageCircle, Send, Clock, CheckCircle } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { APP_CONFIG } from '../constants/config';
-import { useForm } from 'react-hook-form';
 import { cn } from '../utils/cn';
-
-
-interface ContactFormData {
-  name: string;
-  email: string;
-  phone: string;
-  subject: string;
-  message: string;
-}
+import { useContactForm } from '../hooks/useContactForm';
 
 const contactInfo = [
   {
@@ -37,10 +28,10 @@ const contactInfo = [
   },
   {
     id: 'whatsapp',
-    icon: MessageCircle,
+    icon: FaWhatsapp,
     label: 'WhatsApp',
     value: 'Chat with us instantly',
-    href: `https://wa.me/${APP_CONFIG.whatsapp}`,
+    href: `https://wa.me/${APP_CONFIG.whatsapp}?text=${encodeURIComponent(APP_CONFIG.whatsappMessage)}`,
     color: 'bg-green-50 text-green-600',
     description: 'Fastest response channel',
   },
@@ -49,14 +40,19 @@ const contactInfo = [
     icon: MapPin,
     label: 'Location',
     value: APP_CONFIG.address,
-    href: 'https://maps.google.com/?q=New+Delhi,India',
+    href: 'https://maps.google.com/?q=Noida+Greater+Noida+India',
     color: 'bg-blue-50 text-blue-600',
-    description: 'Serving Pan-India',
+    description: 'Serving Pan Delhi NCR',
   },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const fadeUp: any = {
+const businessHours = [
+  { day: 'Monday – Friday', time: '9:00 AM – 8:00 PM', active: true },
+  { day: 'Saturday',         time: '10:00 AM – 6:00 PM', active: true },
+  { day: 'Sunday',           time: 'Closed',             active: false },
+];
+
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (delay: number) => ({
     opacity: 1,
@@ -66,86 +62,63 @@ const fadeUp: any = {
 };
 
 /**
- * ContactPage — full contact page with form, contact info cards, map, and WhatsApp CTA
+ * ContactPage — Integrated version matching the useLeadForm pattern.
+ * Fully retains layout, custom styling, responsive layout pillars, and animations.
  */
 export function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const {
+    methods,
+    formState,
+    onSubmit,
+    isSubmitting,
+  } = useContactForm();
 
   const {
     register,
-    handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm<ContactFormData>();
+  } = methods;
 
-  const onSubmit = async (data: ContactFormData) => {
-    setIsSubmitting(true);
-    // Simulate async submit (replace with emailjs or API call)
-    await new Promise((r) => setTimeout(r, 1200));
-    console.log('[ContactForm] submitted:', data);
-    setIsSubmitting(false);
-    setSubmitted(true);
-    reset();
-    // Reset success message after 5 s
-    setTimeout(() => setSubmitted(false), 5000);
-  };
+  const submitted = formState.status === 'success';
+  const whatsappUrl = `https://wa.me/${APP_CONFIG.whatsapp}?text=${encodeURIComponent(APP_CONFIG.whatsappMessage)}`;
 
   return (
     <div className="bg-[#faf9ff] min-h-screen">
 
       {/* ── Hero Banner ── */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#faf9ff] via-[#f6f3ff] to-[#f0ecff] py-14 md:py-20">
-        {/* Background dot grid */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#faf9ff] via-[#f6f3ff] to-[#f0ecff] py-12 md:py-20">
         <div
           className="absolute inset-0 opacity-[0.15]"
-          style={{
-            backgroundImage: 'radial-gradient(circle, #7668B6 1px, transparent 1px)',
-            backgroundSize: '28px 28px',
-          }}
+          style={{ backgroundImage: 'radial-gradient(circle, #7668B6 1px, transparent 1px)', backgroundSize: '28px 28px' }}
           aria-hidden="true"
         />
-        {/* Glow blobs */}
         <div className="absolute -top-32 -right-32 w-80 h-80 bg-brand-purple/8 rounded-full blur-3xl" aria-hidden="true" />
         <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-brand-yellow/5 rounded-full blur-2xl" aria-hidden="true" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            custom={0}
-            variants={fadeUp}
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-purple-light text-brand-purple text-xs font-bold rounded-full mb-5 tracking-wide uppercase">
-              📞 Get In Touch
-            </span>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial="hidden" animate="visible" custom={0} variants={fadeUp}>
+            <div className="bg-brand-purple-dark/[0.07] rounded-2xl px-6 py-8 md:py-10 text-center max-w-3xl mx-auto">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-purple-light text-brand-purple text-xs font-bold rounded-full mb-5 tracking-wide uppercase">
+                📞 Get In Touch
+              </span>
+              <motion.h1
+                initial="hidden" animate="visible" custom={0.08} variants={fadeUp}
+                className="font-display font-black text-neutral-900 text-3xl sm:text-4xl md:text-5xl leading-tight tracking-tight mb-3"
+              >
+                We're Here to <span className="text-brand-purple">Help You</span>
+              </motion.h1>
+              <motion.p
+                initial="hidden" animate="visible" custom={0.16} variants={fadeUp}
+                className="text-neutral-500 text-base md:text-lg max-w-lg mx-auto leading-relaxed"
+              >
+                Have a question about finding a tutor? Reach out — our team responds within 24 hours.
+              </motion.p>
+            </div>
           </motion.div>
-
-          <motion.h1
-            initial="hidden"
-            animate="visible"
-            custom={0.08}
-            variants={fadeUp}
-            className="font-display font-black text-neutral-900 text-4xl md:text-5xl leading-tight tracking-tight mb-4"
-          >
-            We're Here to{' '}
-            <span className="text-brand-purple">Help You</span>
-          </motion.h1>
-
-          <motion.p
-            initial="hidden"
-            animate="visible"
-            custom={0.16}
-            variants={fadeUp}
-            className="text-neutral-500 text-lg max-w-lg mx-auto leading-relaxed"
-          >
-            Have a question about finding a tutor? Reach out — our team responds within 24 hours.
-          </motion.p>
         </div>
       </div>
 
       {/* ── Contact Info Cards ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 md:-mt-8 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {contactInfo.map((item, index) => {
             const Icon = item.icon;
@@ -163,13 +136,13 @@ export function ContactPage() {
                 <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0', item.color)}>
                   <Icon className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs font-bold text-neutral-400 uppercase tracking-wide mb-1">{item.label}</p>
-                  <p className="text-sm font-semibold text-neutral-900 group-hover:text-brand-purple transition-colors duration-200 leading-snug">
+                  <p className="text-sm font-semibold text-neutral-900 group-hover:text-brand-purple transition-colors duration-200 leading-snug break-words">
                     {item.value}
                   </p>
                   <p className="text-xs text-neutral-400 mt-1 flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
+                    <Clock className="w-3 h-3 flex-shrink-0" />
                     {item.description}
                   </p>
                 </div>
@@ -179,11 +152,11 @@ export function ContactPage() {
         </div>
       </div>
 
-      {/* ── Main Section: Form + Map ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      {/* ── Main Content Grid ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
 
-          {/* ── Contact Form ── */}
+          {/* Left Column — Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
@@ -208,12 +181,25 @@ export function ContactPage() {
               >
                 <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                 <p className="text-green-700 text-sm font-medium">
-                  Message sent! We'll get back to you within 24 hours.
+                  {formState.message}
                 </p>
               </motion.div>
             )}
 
-            <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-4">
+            {/* Error Banner */}
+            {formState.status === 'error' && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4"
+              >
+                <p className="text-sm font-medium text-red-600">
+                  {formState.message}
+                </p>
+              </motion.div>
+            )}
+
+            <form onSubmit={onSubmit} noValidate className="flex flex-col gap-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Input
                   id="contact-name"
@@ -271,10 +257,7 @@ export function ContactPage() {
 
               {/* Message textarea */}
               <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="contact-message"
-                  className="text-sm font-semibold text-neutral-700"
-                >
+                <label htmlFor="contact-message" className="text-sm font-semibold text-neutral-700">
                   Message <span className="text-rose-500">*</span>
                 </label>
                 <textarea
@@ -315,67 +298,88 @@ export function ContactPage() {
             </form>
           </motion.div>
 
-          {/* ── Right Side: Map + WhatsApp CTA ── */}
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.55, delay: 0.25 }}
-            className="flex flex-col gap-5"
-          >
-            {/* Map */}
-            <div className="rounded-2xl overflow-hidden border border-brand-purple/15 shadow-card-lg">
-              <iframe
-                title="HomeTutorsWorld Location - Delhi NCR"
-                src="https://www.google.com/maps?q=New+Delhi+India&output=embed"
-                width="100%"
-                height="340"
-                style={{ border: 0, display: 'block' }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-
-            {/* WhatsApp instant chat card */}
-            <a
-              href={`https://wa.me/${APP_CONFIG.whatsapp}?text=Hi%2C%20I%20need%20help%20finding%20a%20tutor.`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-4 bg-green-600 hover:bg-green-700 text-white rounded-2xl p-5 shadow-card transition-all duration-200 hover:shadow-card-hover hover:-translate-y-0.5"
+          {/* Right Column — WhatsApp CTA, Contact Shortcuts, and Hours */}
+          <div className="flex flex-col gap-6">
+            
+            {/* WhatsApp Big CTA Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.55, delay: 0.2 }}
             >
-              <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
-                <MessageCircle className="w-6 h-6" />
-              </div>
-              <div>
-                <p className="font-display font-bold text-base leading-tight">Chat on WhatsApp</p>
-                <p className="text-white/80 text-sm mt-0.5">Get instant answers — reply in minutes</p>
-              </div>
-              <div className="ml-auto">
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-colors duration-200">
-                  <Send className="w-4 h-4" />
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 bg-green-600 hover:bg-green-700 text-white rounded-2xl p-5 sm:p-6 shadow-card transition-all duration-200 hover:shadow-card-hover hover:-translate-y-0.5"
+              >
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                  <FaWhatsapp size={28} />
                 </div>
-              </div>
-            </a>
+                <div className="min-w-0">
+                  <p className="font-display font-bold text-base sm:text-lg leading-tight">Chat on WhatsApp</p>
+                  <p className="text-white/80 text-sm mt-0.5">Get instant answers — we reply in minutes</p>
+                </div>
+                <div className="ml-auto flex-shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-colors duration-200">
+                    <Send className="w-4 h-4" />
+                  </div>
+                </div>
+              </a>
+            </motion.div>
 
-            {/* Business hours card */}
-            <div className="bg-white rounded-2xl border border-neutral-200/80 shadow-card p-5">
-              <h3 className="font-display font-bold text-neutral-900 text-base mb-4 flex items-center gap-2">
+            {/* Quick Actions Shortcuts Grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.25 }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            >
+              <a
+                href={`tel:${APP_CONFIG.phone.replace(/\s/g, '')}`}
+                className="group bg-white rounded-2xl border border-neutral-200/80 shadow-card p-5 flex items-center gap-3 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <span className="w-10 h-10 rounded-xl bg-brand-purple-light text-brand-purple flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-xs font-bold text-neutral-400 uppercase tracking-wide">Call Now</p>
+                  <p className="text-sm font-bold text-neutral-900 group-hover:text-brand-purple transition-colors truncate">{APP_CONFIG.phone}</p>
+                </div>
+              </a>
+              <a
+                href={`mailto:${APP_CONFIG.email}`}
+                className="group bg-white rounded-2xl border border-neutral-200/80 shadow-card p-5 flex items-center gap-3 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <span className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-xs font-bold text-neutral-400 uppercase tracking-wide">Email</p>
+                  <p className="text-sm font-bold text-neutral-900 group-hover:text-amber-600 transition-colors truncate">{APP_CONFIG.email}</p>
+                </div>
+              </a>
+            </motion.div>
+
+            {/* Business Hours Block */}
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.55, delay: 0.3 }}
+              className="bg-white rounded-2xl border border-neutral-200/80 shadow-card p-6 md:p-8"
+            >
+              <h2 className="font-display font-bold text-neutral-900 text-xl mb-6 flex items-center gap-2">
                 <span className="w-1.5 h-5 rounded-full bg-brand-purple inline-block" aria-hidden="true" />
                 Business Hours
-              </h3>
-              <div className="flex flex-col gap-2.5">
-                {[
-                  { day: 'Monday – Friday', time: '9:00 AM – 8:00 PM', active: true },
-                  { day: 'Saturday',         time: '10:00 AM – 6:00 PM', active: true },
-                  { day: 'Sunday',           time: 'Closed',             active: false },
-                ].map(({ day, time, active }) => (
-                  <div key={day} className="flex items-center justify-between py-2 border-b border-neutral-100 last:border-0">
+              </h2>
+              <div className="flex flex-col gap-3">
+                {businessHours.map(({ day, time, active }) => (
+                  <div key={day} className="flex items-center justify-between py-2.5 border-b border-neutral-100 last:border-0">
                     <span className="text-sm font-medium text-neutral-700">{day}</span>
                     <span
                       className={cn(
-                        'text-sm font-semibold px-2.5 py-0.5 rounded-lg',
-                        active
-                          ? 'text-brand-purple bg-brand-purple-light'
-                          : 'text-neutral-400 bg-neutral-100'
+                        'text-sm font-semibold px-3 py-1 rounded-lg',
+                        active ? 'text-brand-purple bg-brand-purple-light' : 'text-neutral-400 bg-neutral-100'
                       )}
                     >
                       {time}
@@ -383,8 +387,15 @@ export function ContactPage() {
                   </div>
                 ))}
               </div>
-            </div>
-          </motion.div>
+
+              <div className="mt-6 p-4 bg-brand-purple-dark/[0.06] rounded-xl">
+                <p className="text-sm text-neutral-600 leading-relaxed">
+                  💡 <strong>Tip:</strong> WhatsApp is our fastest channel. For urgent enquiries, send us a message and we'll respond within minutes.
+                </p>
+              </div>
+            </motion.div>
+
+          </div>
         </div>
       </div>
     </div>

@@ -63,6 +63,7 @@ export function FAQSection() {
           title={<>Frequently Asked Questions</>}
           subtitle="Everything you need to know about finding a tutor with HomeTutorsWorld."
           align="center"
+          highlighted
         />
 
         <div className="mt-8 max-w-3xl mx-auto flex flex-col gap-3">

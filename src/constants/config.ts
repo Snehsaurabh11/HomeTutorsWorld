@@ -1,6 +1,6 @@
 // Brand configuration — single source of truth
 // All sensitive/configurable values are loaded from environment variables.
-// See .env.example for required variables.
+// See .env.example for the full list of required variables.
 
 export const APP_CONFIG = {
   name:        import.meta.env.VITE_BUSINESS_NAME        || 'HomeTutorsWorld',
@@ -8,10 +8,17 @@ export const APP_CONFIG = {
   tagline:     'Trusted Home & Online Tutors in Delhi NCR',
   description:
     'HomeTutorsWorld is a trusted tutoring platform offering personalized home tuition and online classes for Class 1–12, CBSE, ICSE, IB, IGCSE, State Boards, IIT JEE, NEET, CUET, CLAT, coding, Artificial Intelligence (AI), language courses, and skill development. Currently serving Noida, Greater Noida, and Greater Noida West, with expansion planned across Delhi NCR.',
-  phone:     import.meta.env.VITE_CONTACT_PHONE    || '+91 84486 22209',
-  email:     import.meta.env.VITE_CONTACT_EMAIL    || 'info@hometutorsworld.com',
-  whatsapp:  import.meta.env.VITE_WHATSAPP_NUMBER  || '918448622209',
-  address:   'Noida, Greater Noida & Greater Noida West',
+  phone:    import.meta.env.VITE_CONTACT_PHONE    || '+91 84486 22209',
+  email:    import.meta.env.VITE_CONTACT_EMAIL    || 'info@hometutorsworld.com',
+  whatsapp: import.meta.env.VITE_WHATSAPP_NUMBER  || '918448622209',
+  /**
+   * Default WhatsApp message — loaded from VITE_WHATSAPP_DEFAULT_MESSAGE.
+   * Will be URL-encoded before use in wa.me links.
+   */
+  whatsappMessage:
+    import.meta.env.VITE_WHATSAPP_DEFAULT_MESSAGE ||
+    'Hello HomeTutorsWorld, I would like to book a free trial class. Please help me find a suitable tutor.',
+  address: 'Noida, Greater Noida & Greater Noida West',
   socialLinks: {
     facebook:  'https://facebook.com/hometutorsworld',
     instagram: 'https://instagram.com/hometutorsworld',
@@ -37,7 +44,6 @@ export const APP_CONFIG = {
 
 /**
  * EmailJS configuration — loaded from environment variables.
- * Set these in your .env file (see .env.example).
  */
 export const EMAIL_CONFIG = {
   serviceId:       import.meta.env.VITE_EMAILJS_SERVICE_ID         || '',
