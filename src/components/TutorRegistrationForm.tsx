@@ -178,7 +178,7 @@ export function TutorRegistrationForm({ className }: TutorRegistrationFormProps)
           <textarea
             id="tutor-about"
             rows={3}
-            className="w-full px-4 py-3 rounded-xl border border-neutral-200 bg-white text-neutral-900 text-sm outline-none transition-all duration-200 focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 resize-none placeholder:text-neutral-400"
+            className="w-full px-4 py-3 rounded-2xl border border-neutral-300 bg-neutral-50 text-neutral-900 text-sm outline-none transition-all duration-200 focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 resize-none placeholder:text-neutral-400"
             placeholder="Your teaching style, strengths, and preferred classes..."
             {...register('aboutYou')}
           />

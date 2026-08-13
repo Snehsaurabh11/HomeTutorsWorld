@@ -82,13 +82,13 @@ export function ContactPage() {
   const whatsappUrl = `https://wa.me/${APP_CONFIG.whatsapp}?text=${encodeURIComponent(APP_CONFIG.whatsappMessage)}`;
 
   return (
-    <div className="bg-[#faf9ff] min-h-screen">
+    <div className="bg-[#FFF8EE] min-h-screen">
 
       {/* ── Hero Banner ── */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#faf9ff] via-[#f6f3ff] to-[#f0ecff] py-12 md:py-20">
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#FFF8EE] via-[#F7F0E3] to-[#F3E6D3] py-12 md:py-20">
         <div
           className="absolute inset-0 opacity-[0.15]"
-          style={{ backgroundImage: 'radial-gradient(circle, #7668B6 1px, transparent 1px)', backgroundSize: '28px 28px' }}
+          style={{ backgroundImage: 'radial-gradient(circle, #C4A88F 1px, transparent 1px)', backgroundSize: '28px 28px' }}
           aria-hidden="true"
         />
         <div className="absolute -top-32 -right-32 w-80 h-80 bg-brand-purple/8 rounded-full blur-3xl" aria-hidden="true" />

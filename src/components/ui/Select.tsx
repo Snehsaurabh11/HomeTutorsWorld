@@ -16,9 +16,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label htmlFor={id} className="text-sm font-medium text-neutral-700">
+          <label htmlFor={id} className="text-sm font-semibold text-neutral-700">
             {label}
-            {props.required && <span className="text-rose-500 ml-1">*</span>}
+            {props.required && <span className="text-brand-purple ml-1">*</span>}
           </label>
         )}
         <div className="relative">
@@ -26,12 +26,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             id={id}
             ref={ref}
             className={cn(
-              'w-full px-4 py-3 rounded-xl border bg-white text-neutral-900 text-sm appearance-none',
+              'w-full px-4 py-3 rounded-2xl border bg-neutral-50 text-neutral-900 text-sm appearance-none',
               'outline-none transition-all duration-200 cursor-pointer pr-10',
               'focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20',
               error
                 ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-200'
-                : 'border-neutral-200 hover:border-neutral-300',
+                : 'border-neutral-300 hover:border-neutral-400',
               className
             )}
             {...props}

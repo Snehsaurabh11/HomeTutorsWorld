@@ -56,7 +56,7 @@ export function FAQSection() {
   };
 
   return (
-    <section className="py-12 bg-[#faf9ff]" aria-labelledby="faq-heading" id="faq">
+    <section className="py-12 bg-[#FFF8EE]" aria-labelledby="faq-heading" id="faq">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="FAQs"

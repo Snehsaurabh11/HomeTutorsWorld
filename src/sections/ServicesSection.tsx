@@ -69,7 +69,7 @@ export function ServicesSection() {
   return (
     <section
       ref={ref}
-      className="py-12 bg-[#faf9ff] overflow-hidden"
+      className="py-12 bg-[#FFF8EE] overflow-hidden"
       aria-labelledby="services-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

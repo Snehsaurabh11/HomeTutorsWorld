@@ -11,6 +11,7 @@ export const features: Feature[] = [
     description:
       'Every tutor is thoroughly screened for academic background, teaching experience, and communication skills before being listed.',
     color: 'text-brand-purple',
+     variant: 'purple',
   },
   {
     id: 'feature-02',
@@ -19,6 +20,7 @@ export const features: Feature[] = [
     description:
       'CBSE, ICSE, IB, IGCSE, State Boards, and NIOS — we cover them all with dedicated subject-specific expertise.',
     color: 'text-blue-500',
+    variant: 'blue',
   },
   {
     id: 'feature-03',
@@ -27,6 +29,7 @@ export const features: Feature[] = [
     description:
       'From school subjects to JEE, NEET, CUET, and CLAT — comprehensive coaching tailored to every learning goal.',
     color: 'text-green-500',
+    variant: 'green',
   },
   {
     id: 'feature-04',
@@ -35,5 +38,6 @@ export const features: Feature[] = [
     description:
       'Choose your preferred time, location, and learning mode — home tuition or live online classes, completely on your terms.',
     color: 'text-rose-500',
+    variant: 'coral',
   },
 ];

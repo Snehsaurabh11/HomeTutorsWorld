@@ -41,7 +41,7 @@ export function HowItWorksSection() {
   return (
     <section
       ref={ref}
-      className="py-7 bg-[#f0ecff]"
+      className="py-7 bg-[#FFF8EE]"
       aria-labelledby="how-it-works-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,7 +55,7 @@ export function HowItWorksSection() {
             title={<>Get Started in 3 Easy Steps</>}
             subtitle="From first enquiry to your first class — fast and worry-free."
             align="center"
-            highlighted
+            
           />
         </motion.div>
 

@@ -16,6 +16,7 @@ export interface Feature {
   title: string;
   description: string;
   color: string; // icon accent color class
+  variant: "purple" | "blue" | "green" | "coral";
 }
 
 // Navigation link type

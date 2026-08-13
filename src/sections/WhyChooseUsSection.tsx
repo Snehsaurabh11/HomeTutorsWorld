@@ -11,11 +11,12 @@ import { features } from '../data/features';
  */
 export function WhyChooseUsSection() {
   const { ref, isInView } = useScrollAnimation<HTMLElement>();
+  const isDesktop = window.innerWidth >= 1024;
 
   return (
     <section
       ref={ref}
-      className="py-7 bg-[#f6f3ff]"
+      className="py-14 "
       aria-labelledby="why-choose-us-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,38 +35,87 @@ export function WhyChooseUsSection() {
             }
             subtitle="Our carefully selected tutors focus on concept clarity, confidence building and long-term academic success through personalized one-to-one learning."
             align="center"
-            highlighted
+            
           />
         </motion.div>
 
         {/* Feature grid — 4 columns on desktop, 2 on tablet, 1 on mobile */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 gap-6 mt-8">
+        
           {features.map((feature, index) => {
             const IconComponent = (LucideIcons as unknown as Record<string, LucideIcon>)[feature.icon] as LucideIcon | undefined;
 
             return (
               <motion.div
-                key={feature.id}
-                initial={{ opacity: 0, y: 24 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.45, delay: index * 0.08 }}
-              >
-                <div className="group bg-white rounded-xl border border-neutral-200/80 shadow-card p-4 h-full flex flex-col gap-2.5 transition-all duration-300 ease-out hover:shadow-card-hover hover:-translate-y-1 hover:border-brand-purple/20 cursor-default">
+               layout
+    key={feature.id}
+    className="feature-wrapper"
+    initial={{ opacity: 0, y: 24 }}
+    animate={isInView ? { opacity: 1, y: 0 } : {}}
+    transition={{ duration: 0.45, delay: index * 0.08 }}
+  style={{
+  rotate: isDesktop ? [-3, 2, -2, 3][index] : 0,
+}}
+
+whileHover={{
+  y: -14,
+  rotate: 0,
+  scale: 1.04,
+  transition: {
+    duration: 0.35,
+    ease: "easeOut",
+  },
+}}
+>
+                <div
+className={`
+group
+feature-card
+card-${feature.variant}
+
+rounded-3xl
+
+p-5
+h-full
+
+flex
+flex-col
+gap-3
+
+cursor-default
+
+transition-all
+duration-500
+ease-out
+`}
+>
                   {/* Icon */}
-                  <div className={`w-9 h-9 rounded-lg flex items-center justify-center bg-brand-purple-light ${feature.color} flex-shrink-0`}>
+                  <motion.div
+  whileHover={{
+    y: -3,
+    scale: 1.1,
+    rotate: 8,
+  }}
+  transition={{
+    type: "spring",
+    stiffness: 320,
+    damping: 18,
+  }}
+ className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/15 backdrop-blur-sm flex-shrink-0"
+>
                     {IconComponent ? (
                       <IconComponent className="w-4 h-4" />
                     ) : (
                       <span className="text-sm">📚</span>
                     )}
-                  </div>
+                  </motion.div>
 
                   {/* Text */}
                   <div>
-                    <h3 className="font-display font-bold text-neutral-900 text-sm leading-tight">
+                    <h3 className="font-display font-bold text-white text-sm leading-tight">
                       {feature.title}
                     </h3>
-                    <p className="text-neutral-500 text-xs leading-relaxed mt-0.5">
+                    <p className="text-white/80 text-xs leading-relaxed mt-0.5">
                       {feature.description}
                     </p>
                   </div>
