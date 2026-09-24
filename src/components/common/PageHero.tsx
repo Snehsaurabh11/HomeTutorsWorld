@@ -34,7 +34,7 @@ export function PageHero({
             className="absolute inset-0 opacity-[0.05]"
             style={{
               backgroundImage:
-                'radial-gradient(circle, #7668B6 1px, transparent 1px)',
+                'radial-gradient(circle, #C4A88F 1px, transparent 1px)',
               backgroundSize: '26px 26px',
             }}
           />

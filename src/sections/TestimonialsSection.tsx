@@ -20,7 +20,7 @@ export function TestimonialsSection() {
   return (
     <section
       ref={ref}
-      className="py-12 bg-[#f0ecff] relative overflow-hidden"
+      className="py-12 bg-[#F7F0E3] relative overflow-hidden"
       aria-labelledby="testimonials-heading"
     >
       {/* Subtle background blobs */}
@@ -46,7 +46,7 @@ export function TestimonialsSection() {
             }
             subtitle="Trusted by families for quality teaching, personalized guidance and reliable tutor matching."
             align="center"
-            highlighted
+            
           />
         </motion.div>
 

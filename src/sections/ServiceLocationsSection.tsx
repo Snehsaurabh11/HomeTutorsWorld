@@ -56,7 +56,7 @@ function LocationGroup({
         {icon}
         {title}
         {badgeLabel && (
-          <span className="ml-auto text-[11px] font-semibold text-violet-500 bg-violet-50 px-2 py-0.5 rounded-full border border-violet-100">
+          <span className="ml-auto text-[11px] font-semibold text-brand-purple bg-brand-purple-light px-2 py-0.5 rounded-full border border-brand-purple/20">
             {badgeLabel}
           </span>
         )}
@@ -86,7 +86,7 @@ export function ServiceLocationsSection() {
   return (
     <section
       ref={ref}
-      className="py-12 bg-[#f6f3ff]"
+      className="py-12 bg-[#F7F0E3]"
       aria-labelledby="locations-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -102,7 +102,7 @@ export function ServiceLocationsSection() {
             title={<>Currently Serving Across Delhi NCR</>}
             subtitle="Trusted home and online tutors in Noida, Greater Noida and Greater Noida West — with more cities launching soon."
             align="center"
-            highlighted
+            
           />
         </motion.div>
 

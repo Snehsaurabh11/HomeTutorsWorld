@@ -66,14 +66,14 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative overflow-hidden flex items-center bg-gradient-to-br from-[#efe8ff] via-[#e8deff] to-[#ddd0ff]"
+      className="relative overflow-hidden flex items-center bg-gradient-to-br from-[#F7F0E3] via-[#F3E6D3] to-[#EFE0C8]"
       aria-label="Hero section"
     >
       {/* Background grid dots */}
       <div
         className="absolute inset-0 opacity-[0.18]"
         style={{
-          backgroundImage: 'radial-gradient(circle, #7260c1 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, #C4A88F 1px, transparent 1px)',
           backgroundSize: '28px 28px',
         }}
         aria-hidden="true"
@@ -134,7 +134,7 @@ export function HeroSection() {
               variants={fadeUp}
               className="text-neutral-500 text-base mt-4 max-w-[460px] leading-relaxed"
             >
-              Connecting students with verified, experienced home tutors and online educators for CBSE, ICSE, IB, IGCSE, JEE, NEET, CUET, CLAT, Class 1–12, languages, coding and AI.
+              {/* Connecting students with verified, experienced home tutors and online educators for CBSE, ICSE, IB, IGCSE, JEE, NEET, CUET, CLAT, Class 1–12, languages, coding and AI. */}
             </motion.p>
 
             {/* Highlight tags — compact inline row */}

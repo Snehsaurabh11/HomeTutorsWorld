@@ -8,49 +8,53 @@ export default {
     extend: {
       colors: {
         brand: {
-          purple:        '#7668B6',
-          'purple-dark':  '#5C4E9C',
-          'purple-darker':'#2D3559',
-          'purple-light': '#F0ECFF',
-          'purple-muted': '#9A8DCC',
-          yellow:         '#F5A623',
-          'yellow-dark':  '#D4891A',
-          'yellow-light': '#FEF3DC',
+          // ── Accent (orange) ─────────────────────────────────────
+          purple:          '#E85D18',   // was #7668B6 — orange accent
+          'purple-dark':   '#24160F',   // was #5C4E9C — deep brown (primary CTA bg)
+          'purple-darker': '#2C180F',   // was #2D3559 — footer dark brown
+          'purple-light':  '#F3E6D3',   // was #F0ECFF — warm beige tint
+          'purple-muted':  '#B07A65',   // was #9A8DCC — warm muted
+          // ── Highlight (golden yellow) ────────────────────────────
+          yellow:          '#F6C945',   // was #F5A623
+          'yellow-dark':   '#E8A800',   // was #D4891A
+          'yellow-light':  '#FEF9E7',   // was #FEF3DC
         },
         neutral: {
-          900: '#1A1A2E',
-          800: '#2D2D4A',
-          700: '#3D3D5C',
-          600: '#4A4A6A',
-          500: '#6B6B8D',
-          400: '#9898B5',
-          300: '#C4C4D8',
-          200: '#E8E8F0',
-          100: '#F4F4FA',
-          50:  '#FAF9FF',
+          // ── Warm brown neutrals (replacing cool purple-tinted) ──
+          900: '#24160F',   // primary text — deep warm brown
+          800: '#3A1F10',
+          700: '#5E4E43',   // secondary text
+          600: '#7A6355',   // muted text
+          500: '#9A8070',   // placeholder text
+          400: '#C4A88F',   // light muted
+          300: '#E5D7C8',   // border
+          200: '#EFE5D5',   // divider
+          100: '#F7F0E3',   // section background — warm cream
+          50:  '#FFF8EE',   // surface — warm white
         },
       },
       fontFamily: {
-        sans:    ['Inter',  'system-ui', 'sans-serif'],
-        display: ['Outfit', 'Inter',    'system-ui', 'sans-serif'],
+        sans:    ['Inter',        'system-ui', 'sans-serif'],
+        display: ['Inter Tight',  'Inter',     'system-ui', 'sans-serif'],
       },
       borderRadius: {
         '4xl': '2rem',
         '5xl': '2.5rem',
       },
       boxShadow: {
-        card:         '0 2px 16px rgba(118, 104, 182, 0.08)',
-        'card-hover': '0 8px 32px rgba(118, 104, 182, 0.18)',
-        'card-lg':    '0 4px 32px rgba(118, 104, 182, 0.12)',
-        glow:         '0 0 40px rgba(118, 104, 182, 0.22)',
-        soft:         '0 1px 8px rgba(118, 104, 182, 0.06)',
+        // Editorial shadows — warm, neutral (no purple tint)
+        card:         '0 10px 35px rgba(0,0,0,.08)',
+        'card-hover': '0 20px 50px rgba(0,0,0,.12)',
+        'card-lg':    '0 10px 35px rgba(0,0,0,.08)',
+        glow:         '0 0 40px rgba(232,93,24,.15)',
+        soft:         '0 2px 12px rgba(0,0,0,.05)',
       },
       animation: {
-        'fade-in-up':  'fadeInUp 0.6s ease-out forwards',
-        'fade-in':     'fadeIn 0.4s ease-out forwards',
-        'float':       'float 3s ease-in-out infinite',
-        'pulse-soft':  'pulseSoft 2s ease-in-out infinite',
-        'tab-slide':   'tabSlide 0.25s ease-out forwards',
+        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+        'fade-in':    'fadeIn 0.4s ease-out forwards',
+        'float':      'float 3s ease-in-out infinite',
+        'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
+        'tab-slide':  'tabSlide 0.25s ease-out forwards',
       },
       keyframes: {
         fadeInUp: {
@@ -75,10 +79,11 @@ export default {
         },
       },
       backgroundImage: {
-        'gradient-brand':  'linear-gradient(135deg, #7668B6 0%, #5C4E9C 100%)',
-        'gradient-hero':   'linear-gradient(135deg, #faf9ff 0%, #f0ecff 100%)',
-        'gradient-cta':    'linear-gradient(135deg, #5C4E9C 0%, #7668B6 60%, #9A8DCC 100%)',
-        'gradient-subtle': 'linear-gradient(135deg, #f6f3ff 0%, #f0ecff 100%)',
+        // Warm editorial gradients
+        'gradient-brand':  'linear-gradient(135deg, #24160F 0%, #E85D18 100%)',
+        'gradient-hero':   'linear-gradient(135deg, #F7F0E3 0%, #F3E6D3 100%)',
+        'gradient-cta':    'linear-gradient(135deg, #24160F 0%, #E85D18 60%, #F6C945 100%)',
+        'gradient-subtle': 'linear-gradient(135deg, #FFF8EE 0%, #F7F0E3 100%)',
       },
     },
   },

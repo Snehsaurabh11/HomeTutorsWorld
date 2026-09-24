@@ -3,38 +3,48 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { Loader2 } from 'lucide-react';
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline';
-type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonSize    = 'sm' | 'md' | 'lg';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
+  variant?:   ButtonVariant;
+  size?:      ButtonSize;
   isLoading?: boolean;
-  leftIcon?: ReactNode;
+  leftIcon?:  ReactNode;
   rightIcon?: ReactNode;
   fullWidth?: boolean;
-  children: ReactNode;
+  children:   ReactNode;
 }
 
+/**
+ * Button — editorial design system
+ *
+ * primary  → dark brown bg (#24160F) + white text
+ * secondary→ golden yellow bg + dark text
+ * outline  → orange border + orange text → hover: orange fill + white text
+ * ghost    → transparent + orange text → hover: warm beige bg
+ *
+ * Radius: 16px (rounded-2xl) per design spec
+ */
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-brand-purple-dark text-white shadow-card hover:shadow-card-hover hover:brightness-130 active:scale-[0.98]',
+    'bg-brand-purple-dark text-white shadow-card hover:shadow-card-hover hover:brightness-110 active:scale-[0.98]',
   secondary:
     'bg-brand-yellow text-neutral-900 font-semibold hover:brightness-105 active:scale-[0.98]',
   ghost:
     'bg-transparent text-brand-purple hover:bg-brand-purple-light active:scale-[0.98]',
   outline:
-    'bg-transparent border-2 border-brand-purple text-brand-purple hover:bg-brand-purple-light active:scale-[0.98]',
+    'bg-transparent border-2 border-brand-purple text-brand-purple hover:bg-brand-purple hover:text-white active:scale-[0.98]',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: 'px-4 py-2 text-sm rounded-lg',
-  md: 'px-6 py-3 text-base rounded-xl',
-  lg: 'px-8 py-4 text-lg rounded-xl',
+  sm: 'px-4 py-2 text-sm rounded-2xl',
+  md: 'px-6 py-3 text-base rounded-2xl',
+  lg: 'px-8 py-4 text-base rounded-2xl',
 };
 
 export function Button({
-  variant = 'primary',
-  size = 'md',
+  variant   = 'primary',
+  size      = 'md',
   isLoading = false,
   leftIcon,
   rightIcon,

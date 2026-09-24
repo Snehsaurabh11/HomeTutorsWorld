@@ -12,7 +12,7 @@ export function LegalCTA() {
       viewport={{ once: true }}
       className="mt-16"
     >
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-purple to-[#6b5bd2] text-white p-8 md:p-12">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-purple-dark to-brand-purple text-white p-8 md:p-12">
 
         {/* Decorative circles */}
         <div className="absolute -top-20 -right-20 w-60 h-60 bg-white/10 rounded-full blur-3xl" />
@@ -37,7 +37,7 @@ export function LegalCTA() {
             <Link to={ROUTES.CONTACT}>
               <Button
                 size="lg"
-                className="bg-white text-brand-purple hover:bg-neutral-100"
+                className="bg-white text-brand-purple-dark hover:bg-neutral-50"
                 rightIcon={<ArrowRight className="w-4 h-4" />}
               >
                 Contact Us

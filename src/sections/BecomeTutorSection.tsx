@@ -20,7 +20,7 @@ export function BecomeTutorSection() {
   return (
     <section
       ref={ref}
-      className="py-12 bg-[#f6f3ff] overflow-hidden"
+      className="py-12 bg-[#F3E6D3] overflow-hidden"
       aria-labelledby="become-tutor-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
